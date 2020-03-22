@@ -11,6 +11,7 @@ werkzeug = "*"
 django-environ = "*"
 psycopg2 = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
