@@ -12,9 +12,9 @@
 <p>{{ message.message }}</p>
 {% endfor %}
 
-<form>
-    <input id='recipient' type='text' placeholder='who are you sending your message to?' required>
-    <input id='message' type='text' placeholder="type your message" required>
+<form id="message-form">
+    <input id='recipient-input' type='text' placeholder='who are you sending your message to?' required>
+    <input id='message-input' type='text' placeholder="type your message" required>
     <button type='submit'>send message</button>
 </form>
  
