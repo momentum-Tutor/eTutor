@@ -14,9 +14,19 @@ messageForm.addEventListener('submit', e => {
     })
     .then((response) => response.json())
     .then(data => {
-        console.log(data)
+        console.log('JSON response SUCCESS')
+        recieveMessage(data)
     })
     .catch((error) => {
         console.error('JSON response ERROR')
     })
 })
+
+function recieveMessage(messageData) {
+    console.log(messageData)
+    let chatBox = document.querySelector('#chat-box')
+    let p = document.createElement('p')
+    chatBox.appendChild(p)
+    p.innerText = messageData.message
+
+}

@@ -25,4 +25,4 @@ def send_message(request):
         print(data)
         messaging = Messaging(sender=request.user, recipient=to_user, message=message)
         messaging.save()
-        return JsonResponse({'works': 'yes'})
+        return JsonResponse(data)

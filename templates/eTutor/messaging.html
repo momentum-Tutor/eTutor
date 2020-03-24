@@ -5,12 +5,14 @@
 {% endblock meta %}
 {% block content %}
 <h1>Messaging</h1>
-{% for message in sent_messages %}
-<p>{{ message.message }}</p>
+<div class='chat-box' id='chat-box'>
+{% for my_message in sent_messages %}
+<p>{{ my_message.message }}</p>
 {% endfor %}
-{% for message in received_messages %}
-<p>{{ message.message }}</p>
+{% for my_message in received_messages %}
+<p>{{ my_message.message }}</p>
 {% endfor %}
+</div>
 
 <form id="message-form">
     <input id='recipient-input' type='text' placeholder='who are you sending your message to?' required>
