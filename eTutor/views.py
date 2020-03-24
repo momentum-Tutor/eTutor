@@ -8,3 +8,8 @@ import json
 def homepage(request):
     return render(request, "eTutor/homepage.html", {
 })
+
+def messaging(request):
+    sent_messages = request.user.message_sender.all()
+    received_messages = request.user.message_recipient.all()
+    return render(request, 'eTutor/messaging.html', {'sent_messages': sent_messages, 'received_messages': received_messages})

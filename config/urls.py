@@ -20,12 +20,13 @@ from eTutor import views as etutor_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', etutor_views.homepage, name="homepage"),
+    path('messaging/', etutor_views.messaging)
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
-        path('', etutor_views.homepage, name="homepage"),
         path('__debug__/', include(debug_toolbar.urls)),
 
         # For django versions before 2.0:
