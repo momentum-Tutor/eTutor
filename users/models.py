@@ -6,4 +6,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    primary_language = models.ForeignKey()
+    known_languages = models.ForeignKey()
+    wanted_languages = models.ForeignKey()
+    current_time_zone = models.CharField(max)
+

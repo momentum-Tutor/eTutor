@@ -12,3 +12,6 @@ django-environ = "*"
 
 [requires]
 python_version = "3.8"
+
+[dev-packages]
+prospector = "*"
