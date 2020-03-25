@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<script src="{% static '/js/messaging.js' %}" defer></script>
+{% endblock meta %}
+{% block content %}
+<h1>Messaging</h1>
+<div class='chat-box' id='chat-box'>
+{% for my_message in sent_messages %}
+<p>{{ my_message.message }}</p>
+{% endfor %}
+{% for my_message in received_messages %}
+<p>{{ my_message.message }}</p>
+{% endfor %}
+</div>
+
+<form id="message-form">
+    <input id='recipient-input' type='text' placeholder='who are you sending your message to?' required>
+    <input id='message-input' type='text' placeholder="type your message" required>
+    <button type='submit'>send message</button>
+</form>
+ 
+
+{% endblock content %}
