@@ -21,8 +21,6 @@ from eTutor import views as etutor_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', etutor_views.homepage, name="homepage"),
-    path('messaging/', etutor_views.messaging),
-    path('messaging/send/', etutor_views.send_message),
 ]
 
 if settings.DEBUG:
