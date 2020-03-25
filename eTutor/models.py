@@ -7,3 +7,5 @@ class Messaging(models.Model):
     message = models.TextField(null=True, blank=True)
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=50)
