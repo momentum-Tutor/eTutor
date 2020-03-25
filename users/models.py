@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from eTutor.models import Language
 # Consider creating a custom user model from scratch as detailed at
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#specifying-a-custom-user-model
 
-class Language(models.Model):
-    name = models.CharField(max_length=50)
 
 
 class User(AbstractUser):
