@@ -86,7 +86,7 @@
                         <a href="#!">About</a>
                     </li>
                     <li>
-                        <a href="#">User_name {{ request.user.username }}</a>
+                        <a href="#">{{ request.user.username }}</a>
                         <ul class="nav-dropdown">
                             <li>
                                 {% if request.user.is_authenticated %}
