@@ -12,6 +12,9 @@ django-environ = "*"
 psycopg2 = "*"
 django-heroku = "*"
 gunicorn = "*"
+twilio = "*"
+python-dotenv = "*"
+faker = "*"
 
 [requires]
 python_version = "3.8"
