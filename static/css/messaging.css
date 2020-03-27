@@ -1,0 +1,12 @@
+.message-box {
+    overflow-y: auto;
+    width:75%;
+    height: 500px;
+    border: solid 1px;
+    background-color: white;
+}
+
+.message {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}

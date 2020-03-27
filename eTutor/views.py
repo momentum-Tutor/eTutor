@@ -21,7 +21,7 @@ def all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'eTutor/messaging.html', {'rooms': rooms})
 
-
+@login_required
 def room_detail(request, slug):
     room = Room.objects.get(slug=slug)
     return render(request, 'eTutor/messaging_detail.html', {'room': room})

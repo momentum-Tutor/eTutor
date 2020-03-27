@@ -5,7 +5,7 @@ let chatClient;
 let roomChannel;
 let username;
 
-function print(infoMessage, asHtml) {
+function printInfo(infoMessage, asHtml) {
     let $msg = $('<div class="info">');
     if (asHtml) {
     $msg.html(infoMessage);
@@ -20,7 +20,7 @@ function printMessage(fromUser, message) {
     if (fromUser === username) {
     $user.addClass("me");
     }
-    let $message = $('<span class="message">').text(message);
+    let $message = $('<p class="message">').text(message);
     let $container = $('<div class="message-container">');
     $container.append($user).append($message);
     $chatWindow.append($container);
@@ -35,7 +35,7 @@ $.getJSON(
     function(data) {
     // Alert the user they have been assigned a random username
     username = data.identity;
-    print(
+    printInfo(
         "You have been assigned a random username of: " +
         '<span class="me">' +
         username +
@@ -57,7 +57,7 @@ function createOrJoinChannel() {
     // Extract the room's channel name from the page URL
     let channelName = window.location.pathname.split("/").slice()[2]
   
-   print(`Attempting to join the "${channelName}" chat channel...`);
+   printInfo(`Attempting to join the "${channelName}" chat channel...`);
   
     chatClient
       .getChannelByUniqueName(channelName)
@@ -82,7 +82,7 @@ function createOrJoinChannel() {
   // Set up channel after it has been found / created
 function setupChannel(name) {
     roomChannel.join().then(function(channel) {
-      print(
+      printInfo(
         `Joined channel ${name} as <span class="me"> ${username} </span>.`,
         true
       );
