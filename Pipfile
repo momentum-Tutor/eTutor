@@ -12,7 +12,6 @@ django-environ = "*"
 psycopg2 = "*"
 django-heroku = "*"
 gunicorn = "*"
-django-registration = "*"
 django-registration-redux = "*"
 
 [requires]
