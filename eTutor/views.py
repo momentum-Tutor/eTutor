@@ -6,12 +6,9 @@ from django.contrib.auth.decorators import login_required
 import json
 from .models import Room
 from users.models import User
-from faker import Faker
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
-
-fake = Faker()
 
 def homepage(request):
     return render(request, "eTutor/homepage.html", {
@@ -27,7 +24,7 @@ def room_detail(request, slug):
     return render(request, 'eTutor/messaging_detail.html', {'room': room})
 
 def token(request):
-    identity = request.GET.get('identity', fake.user_name())
+    identity = request.GET.get('identity', request.user.username)
     device_id = request.GET.get('device', 'default')  # unique device ID
 
     account_sid = settings.TWILIO_ACCOUNT_SID

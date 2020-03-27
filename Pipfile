@@ -14,7 +14,6 @@ django-heroku = "*"
 gunicorn = "*"
 twilio = "*"
 python-dotenv = "*"
-faker = "*"
 
 [requires]
 python_version = "3.8"
