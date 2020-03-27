@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Third-party
     'debug_toolbar',
     'django_extensions',
+    'registration',
 
     # Project-specific
     'users',
@@ -139,6 +140,13 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
+
+
+# Registration settings
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGIN_REDIRECT_URL = '/'
+#ACCOUNT_ACTIVATION_DAYS = 7
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Configure Django App for Heroku.
 import django_heroku

@@ -4,3 +4,4 @@ from .models import Language
 
 
 admin.site.register(Language)
+

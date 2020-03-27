@@ -18,9 +18,16 @@ from django.conf import settings
 from django.urls import include, path
 from eTutor import views as etutor_views
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', etutor_views.homepage, name="homepage"),
+    path('', etutor_views.homePage, name="homepage"),
+    path('accounts/', include('registration.backends.simple.urls')),
+    #path('', etutor_views.homePage, name="register"),
+	# path('login/', etutor_views.loginPage, name="login"),  
+	# path('logout/', etutor_views.logoutUser, name="logout"),
+    #path('register/', etutor_views.signup, name='signup'),
 ]
 
 if settings.DEBUG:
