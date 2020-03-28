@@ -36,6 +36,7 @@ def token(request):
 
     # Create a unique endpoint ID for the device
     endpoint = "MyDjangoChatRoom:{0}:{1}".format(identity, device_id)
+    print(endpoint)
 
     if chat_service_sid:
         chat_grant = ChatGrant(endpoint_id=endpoint,

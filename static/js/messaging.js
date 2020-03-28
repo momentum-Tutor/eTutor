@@ -47,6 +47,7 @@ $.getJSON(
     Twilio.Chat.Client.create(data.token).then(client => {
         // Use client
         chatClient = client;
+        console.log(chatClient)
         chatClient.getSubscribedChannels().then(createOrJoinChannel);
     });
 
@@ -81,13 +82,17 @@ function createOrJoinChannel() {
 
   // Set up channel after it has been found / created
 function setupChannel(name) {
-    roomChannel.join().then(function(channel) {
+    if (roomChannel.state.status == 'joined') {
+        console.log('already joined')
+        roomChannel.getMessages(30).then(processPage)
+    } else { roomChannel.join().then(function(channel) {
       printInfo(
         `Joined channel ${name} as <span class="me"> ${username} </span>.`,
         true
       );
       channel.getMessages(30).then(processPage);
     });
+}
   
     // Listen for new messages sent to the channel
     roomChannel.on("messageAdded", function(message) {
