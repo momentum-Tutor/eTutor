@@ -6,12 +6,9 @@ from django.contrib.auth.decorators import login_required
 import json
 from .models import Room
 from users.models import User
-from faker import Faker
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
-
-fake = Faker()
 
 def homepage(request):
     return render(request, "eTutor/homepage.html", {
@@ -21,13 +18,13 @@ def all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'eTutor/messaging.html', {'rooms': rooms})
 
-
+@login_required
 def room_detail(request, slug):
     room = Room.objects.get(slug=slug)
     return render(request, 'eTutor/messaging_detail.html', {'room': room})
 
 def token(request):
-    identity = request.GET.get('identity', fake.user_name())
+    identity = request.GET.get('identity', request.user.username)
     device_id = request.GET.get('device', 'default')  # unique device ID
 
     account_sid = settings.TWILIO_ACCOUNT_SID
@@ -39,6 +36,7 @@ def token(request):
 
     # Create a unique endpoint ID for the device
     endpoint = "MyDjangoChatRoom:{0}:{1}".format(identity, device_id)
+    print(endpoint)
 
     if chat_service_sid:
         chat_grant = ChatGrant(endpoint_id=endpoint,
