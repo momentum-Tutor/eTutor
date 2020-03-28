@@ -75,8 +75,9 @@ from django.http import HttpResponse, JsonResponse
 from users.models import User
 
 def homePage(request):
-    if request.user.is_authenticated :
-        return render(request, 'eTutor/homepage.html')
+    allusers=User.objects.exclude(username=request.user)
+    if request.user.is_authenticated:
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
     else: 
         return render(request, 'eTutor/welcome_page.html')
 

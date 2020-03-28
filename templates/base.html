@@ -50,36 +50,6 @@
                                     <a href="tel:" class="f6 link blue hover-dark-gray"></a>
                                 </div>
                             </li>
-                            <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
-                                <img class="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-jxnblk.jpg" />
-                                <div class="pl3 flex-auto">
-                                    <span class="f6 db black-70">Jxnblk</span>
-                                    <span class="f6 db black-70">Large Circle, Inc</span>
-                                </div>
-                                <div>
-                                    <a href="tel:" class="f6 link blue hover-dark-gray"></a>
-                                </div>
-                            </li>
-                            <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
-                                <img class="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-jasonli.jpg" />
-                                <div class="pl3 flex-auto">
-                                    <span class="f6 db black-70">Jason Li</span>
-                                    <span class="f6 db black-70">Little Blue Square, Inc</span>
-                                </div>
-                                <div>
-                                    <a href="tel:" class="f6 link blue hover-dark-gray"></a>
-                                </div>
-                            </li>
-                            <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
-                                <img class="w2 h2 w3-ns h3-ns br-100" src="http://tachyons.io/img/avatar-yavor.jpg" />
-                                <div class="pl3 flex-auto">
-                                    <span class="f6 db black-70">Yavor</span>
-                                    <span class="f6 db black-70">Large Circle, Inc</span>
-                                </div>
-                                <div>
-                                    <a href="tel:" class="f6 link blue hover-dark-gray"></a>
-                                </div>
-                            </li>
                         </ul>
                     </li>
 
@@ -105,10 +75,11 @@
         </div>
     </section>
     {% endif  %}
+    <div class="tc">
+        {% block content %}
 
-    {% block content %}
-
-    {% endblock %}
+        {% endblock %}
+    </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>

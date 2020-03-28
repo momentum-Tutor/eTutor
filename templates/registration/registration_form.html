@@ -4,11 +4,34 @@
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 
 {% block content %}
-<form method="post" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="{% trans 'Submit' %}" />
-</form>
+<main class="pa4 black-80">
+    <form class="measure center" method="post" action="" enctype="multipart/form-data">
+        <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+            <legend class="f4 fw6 ph0 mh0">Register</legend>
+            <div class="mt3">
+                {% csrf_token %}
+                {% for field in form %}
+                <label class="db fw6 lh-copy f6" for="email-address">{{field.label_tag}}</label>
+                <td class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100">
+                    {{ field.errors }}
+                    {{ field }}
+                </td>
+                {% endfor %}
+            </div>
+        </fieldset>
+        <div class="">
+            <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit"
+                value="{% trans 'Submit' %}" />
+        </div>
+
+    </form>
+</main>
+
+
+
+
+
+
 {% endblock %}
 
 

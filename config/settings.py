@@ -152,3 +152,5 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 import django_heroku
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
+
+REGISTRATION_FORM = 'users.forms.CustomRegistrationForm'
