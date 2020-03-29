@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+
+    <h2>All Users</h2>
+
+    {% for user in allusers %}
+
+    <ul id="usersList">
+        <li>
+            <p>Primary Languages: {{user.primary_language.name}}</p>
+            <form class="w-100 tr">
+                <button class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+
+                    Follow</button>
+            </form>
+        </li>
+    </ul>
+
+
+    {% endfor %}
+
+
+    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Add Friend</a>
+    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Message</a>
+    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Call</a>
+
+
+</article>
+{% endblock %}

@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', etutor_views.homePage, name="homepage"),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('users/', etutor_views.usersPage, name="all_users"),
     #path('', etutor_views.homePage, name="register"),
 	# path('login/', etutor_views.loginPage, name="login"),  
 	# path('logout/', etutor_views.logoutUser, name="logout"),

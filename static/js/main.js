@@ -14,5 +14,14 @@
     $('#nav-toggle').on('click', function () {
       this.classList.toggle('active')
     })
-  }) 
+  })
 })(jQuery)
+
+$(document).ready(function () {
+  $('#searchBar').on('keyup', function () {
+    var value = $(this).val().toLowerCase()
+    $('#usersList li').filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    })
+  })
+})

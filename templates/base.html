@@ -20,13 +20,14 @@
             <div class="logo">
                 Logo
             </div>
-            <form class="searchBar">
-                <input type="text" placeholder=" Search..." required>
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+
             <nav>
                 <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
                 <ul class="nav-list">
+                    <li class="searchBar">
+                        <input type="text" id="searchBar" placeholder=" Search...">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </li>
                     <li>
                         <a href="#">Home</a>
                     </li>
@@ -49,6 +50,9 @@
                                 <div>
                                     <a href="tel:" class="f6 link blue hover-dark-gray"></a>
                                 </div>
+                            </li>
+                            <li class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
+                                <a href="{% url 'all_users' %}">Add Friend</a>
                             </li>
                         </ul>
                     </li>
