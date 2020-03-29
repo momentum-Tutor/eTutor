@@ -193,3 +193,7 @@ article {
 .chat-box {
   border: solid 1px;
 }
+
+#usersList li {
+  list-style-type: none;
+}
