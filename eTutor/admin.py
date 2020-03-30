@@ -5,5 +5,3 @@ admin.site.register(Language)
 admin.site.register(Room)
 
 
-admin.site.register(Language)
-

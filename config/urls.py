@@ -8,7 +8,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', etutor_views.homepage, name="homepage"),
+    path('', etutor_views.homePage, name="homepage"),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('users/', etutor_views.usersPage, name="all_users"),
     path('rooms/', etutor_views.all_rooms, name="all_rooms"),
     path('rooms/<slug:slug>', etutor_views.room_detail),
     url(r'token$', etutor_views.token, name="token"),
