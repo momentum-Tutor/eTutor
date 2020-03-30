@@ -19,7 +19,7 @@ body {
 }
 
 .searchBar{
-  padding-right: 250px;
+  padding-right: 200px;
   line-height: 70px;
   
 }
@@ -48,6 +48,10 @@ nav ul {
 nav ul li {
   float: left;
   position: relative;
+}
+nav ul li{
+  background-color: #0c5055;
+  color: #ffffff;
 }
 nav ul li a,
 nav ul li a:visited {
@@ -196,4 +200,14 @@ article {
 
 #usersList li {
   list-style-type: none;
+}
+
+.form-control{
+  font-weight: bold;
+  -webkit-appearance: none;
+       -moz-appearance: none;
+       border-style: solid;
+  border-width: 1px;
+  background-color: transparent;
+  width: 100%;
 }

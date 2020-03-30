@@ -7,26 +7,27 @@
     <h2>All Users</h2>
 
     {% for user in allusers %}
+    {% if user.wanted_languages %}
+    <main class="mw6 center">
+        <ul id="usersList" class="dt w-100  pb2 mt2">
+            <li class="bb b--black-05">
+                <div class="dtc v-mid pl3">
+                    <a class="f5 fw6 db black link dim" href="">{{user}}</a>
+                    <p class="f6 fw4 mt0 mb0 black-80">Primary Languages: {{user.primary_language.name}}</p>
+                    <p class="f6 fw4 mt0 mb0 black-80">Wanted Language: {{user.wanted_languages.name}}</p>
+                </div>
+                <div class="dtc v-mid pl6">
+                    <form class="w-100 tr">
+                        <button class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+
+                            Follow</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </main>
 
-    <ul id="usersList">
-        <li>
-            <p>Primary Languages: {{user.primary_language.name}}</p>
-            <p>Wanted Language: {{user.wanted_languages.name}}</p>
-            <form class="w-100 tr">
-                <button class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+
-                    Follow</button>
-            </form>
-        </li>
-    </ul>
-
-
+    {% endif %}
     {% endfor %}
-
-
-    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Add Friend</a>
-    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Message</a>
-    <a class="f6 link dim br-pill ba ph3 pv2 mb2 dib black" href="#0">Call</a>
-
 
 </article>
 {% endblock %}
