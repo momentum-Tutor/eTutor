@@ -1,7 +1,5 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.decorators.http import require_GET, require_POST
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 import json
 from .models import Room
@@ -10,9 +8,20 @@ from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
 
-def homepage(request):
-    return render(request, "eTutor/homepage.html", {
-})
+def homePage(request):
+    allusers = User.objects.all()
+    if request.user.is_authenticated:
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
+    else: 
+        return render(request, 'eTutor/welcome_page.html')
+
+def logout(request):
+    return render(request, 'eTutor/homepage.html')
+
+
+def usersPage(request):
+    allusers = User.objects.all()
+    return render(request, 'eTutor/all_users.html', {'allusers': allusers})
 
 def all_rooms(request):
     rooms = Room.objects.all()
