@@ -12,8 +12,8 @@ django-environ = "*"
 psycopg2 = "*"
 django-heroku = "*"
 gunicorn = "*"
-django-registration-redux = "*"
-django-widget-tweaks = "*"
+twilio = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

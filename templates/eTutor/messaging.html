@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<script src="{% static '/js/messaging.js' %}" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
 {% endblock meta %}
 {% block content %}
-<h1>Messaging</h1>
-<div class='chat-box' id='chat-box'>
-{% for my_message in sent_messages %}
-<p>{{ my_message.message }}</p>
-{% endfor %}
-{% for my_message in received_messages %}
-<p>{{ my_message.message }}</p>
-{% endfor %}
-</div>
 
-<form id="message-form">
-    <input id='recipient-input' type='text' placeholder='who are you sending your message to?' required>
-    <input id='message-input' type='text' placeholder="type your message" required>
-    <button type='submit'>send message</button>
-</form>
- 
-
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        {% for room in rooms %}
+        <div class="column">
+          <div class="card rounded-edges">
+            <div class="card-content">
+              <p class="title is-4">{{room.name}}</p>
+              <div class="content">
+                <p>
+                  {{room.description}}
+                </p>
+                <a href="/rooms/{{room.slug}}" class="button">Join Room</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
 {% endblock content %}
