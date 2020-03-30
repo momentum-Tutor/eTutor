@@ -10,3 +10,9 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+
+class Friendship(models.Model):
+    requester = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='f_requester')
+    reciever = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='f_reciever')
+    accepted = models.BooleanField(default=False)
+    pass
