@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.http import JsonResponse
-=======
 import json
 from django.http import HttpResponse
->>>>>>> master
 from .models import Room
 from users.models import User
 from django.conf import settings
