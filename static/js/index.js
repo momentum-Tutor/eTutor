@@ -1,11 +1,14 @@
 'use strict'
 
 var Video = require('twilio-video')
+var Window = require('window')
+var $ = require('jquery')
 
 var activeRoom
 var previewTracks
 var identity
 var roomName
+var window = new Window()
 
 // Attach the Track to the DOM.
 function attachTrack (track, container) {
