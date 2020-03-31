@@ -12,7 +12,7 @@
                 {% csrf_token %}
                 {% for field in form %}
                 <label class="db fw5 pa1 lh-copy f6">{{field.label_tag}}</label>
-                {{ field|add_class:"pa1 input-reset ba bg-white hover-white w-40"}}
+                {{ field|add_class:"pa1 input-reset ba bg-white hover-black w-40"}}
                 {% endfor %}
             </div>
         </fieldset>
