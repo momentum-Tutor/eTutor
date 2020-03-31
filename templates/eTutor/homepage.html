@@ -21,20 +21,26 @@
     <article class="dt w-100 bb b--black-05 pb2 mt2">
         <div class="dtc v-mid pl3">
             <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Primary Language</h1>
+
             <h2 class="f6 fw5 mt0 mb0 black-70">{{user.primary_language.name}}</h2>
         </div>
     </article>
     <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
         <div class="dtc v-mid pl3">
             <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages</h1>
-            <h2 class="f6 fw4 mt0 mb0 black-70">{{user.known_languages.name}}</h2>
+
+            {% for language in user.known_languages.all %}
+            <h2 class="f6 fw4 mt0 mb0 black-70">{{language.name}}</h2>
+            {% endfor %}
         </div>
 
     </article>
     <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
         <div class="dtc v-mid pl3">
             <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn.</h1>
-            <h2 class="f6 fw4 mt0 mb0 black-60">{{user.wanted_languages.name}}</h2>
+            {% for language in user.wanted_languages.all %}
+            <h2 class="f6 fw4 mt0 mb0 black-60">{{language.name}}</h2>
+            {% endfor %}
         </div>
 
     </article>

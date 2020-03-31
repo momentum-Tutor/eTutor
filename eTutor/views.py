@@ -7,7 +7,8 @@ from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
-from users.forms import CustomRegistrationForm
+from users.forms import CustomRegistrationForm, UpdateUserForm
+
 
 def homePage(request):
     allusers = User.objects.all()
@@ -27,12 +28,12 @@ def usersPage(request):
 @login_required
 def user_edit(request):
     if request.method == 'POST':
-        form = CustomRegistrationForm(request.POST, instance=request.user)
+        form = UpdateUserForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
             return redirect('homepage')
     else:
-        form = CustomRegistrationForm(instance=request.user)
+        form = UpdateUserForm(instance=request.user)
     return render(request, 'eTutor/update.html', {'form':form})
 
    
