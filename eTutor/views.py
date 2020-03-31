@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 import json
+from django.http import HttpResponse
 from .models import Room
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
+from users.forms import CustomRegistrationForm
 
 def homePage(request):
     allusers = User.objects.all()
@@ -22,6 +23,19 @@ def logout(request):
 def usersPage(request):
     allusers = User.objects.all()
     return render(request, 'eTutor/all_users.html', {'allusers': allusers})
+
+@login_required
+def user_edit(request):
+    if request.method == 'POST':
+        form = CustomRegistrationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            return redirect('homepage')
+    else:
+        form = CustomRegistrationForm(instance=request.user)
+    return render(request, 'eTutor/update.html', {'form':form})
+
+   
 
 def all_rooms(request):
     rooms = Room.objects.all()

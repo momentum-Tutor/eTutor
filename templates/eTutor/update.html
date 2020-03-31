@@ -1,0 +1,49 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block content %}
+<main class="pa4 black-80">
+    <form method="post" action="" enctype="multipart/form-data">
+        <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+            <legend class="f4 fw6 ph0 mh0">Profile Update</legend>
+            <div class="mt3">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name == 'primary_language'%} <label
+                    class="db fw5 pa1 lh-copy f6">{{field.label_tag}}</label>
+                {{ field|add_class:"pa1 input-reset ba bg-white hover-white w-40"}} {% endif %}
+                {% if field.name == 'known_languages'%}
+                <label class="db fw5 pa1 lh-copy f6">{{field.label_tag}}</label>
+                {{ field|add_class:"pa1 input-reset ba bg-white hover-white w-40"}} {% endif %}
+                {% if field.name == 'wanted_languages'%}
+                <label class="db fw5 pa1 lh-copy f6">{{field.label_tag}}</label>
+                {{ field|add_class:"pa1 input-reset ba bg-white hover-white w-40"}} {% endif %}
+                {% endfor %}
+            </div>
+        </fieldset>
+        <div class="">
+            <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit"
+                value="Update">
+        </div>
+
+    </form>
+</main>
+
+
+
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_form.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+The registration form. This will be an instance of some subclass
+of ``django.forms.Form``; consult `Django's forms documentation
+<http: //docs.djangoproject.com/en/dev/topics/forms />`_ for
+information on how to display this in a template.
+{% endcomment %}
