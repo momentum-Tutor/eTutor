@@ -1,9 +1,11 @@
 
 body {
 	margin: 0;
-    padding: 0;
-    background-color: rgb(160, 214, 196);
+  padding: 0;
+  background-color: rgb(160, 214, 196);
+  font-family: sans-serif;
 }
+
 .nav-bar {
   height: 70px;
   background: #0c5055;
@@ -193,8 +195,3 @@ article {
 .checked {
   color: orange;
 }
-
-.chat-box {
-  border: solid 1px;
-}
-

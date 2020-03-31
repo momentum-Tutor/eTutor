@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+from django.http import JsonResponse
+=======
 import json
 from django.http import HttpResponse
+>>>>>>> master
 from .models import Room
 from users.models import User
 from django.conf import settings
@@ -20,7 +24,6 @@ def homePage(request):
 def logout(request):
     return render(request, 'eTutor/homepage.html')
 
-
 def usersPage(request):
     allusers = User.objects.all()
     return render(request, 'eTutor/all_users.html', {'allusers': allusers})
@@ -35,8 +38,6 @@ def user_edit(request):
     else:
         form = UpdateUserForm(instance=request.user)
     return render(request, 'eTutor/update.html', {'form':form})
-
-   
 
 def all_rooms(request):
     rooms = Room.objects.all()
@@ -73,3 +74,15 @@ def token(request):
     }
 
     return JsonResponse(response)
+
+@login_required
+def direct_message(request, slug):
+    try:
+        room = Room.objects.get(slug=slug)
+        print('room retrieved')
+        print(request.method)
+    except Room.DoesNotExist:
+        room = Room(name=slug, description=slug, slug=slug)
+        room.save()
+        print("room created")
+    return render(request, 'eTutor/messaging_detail.html', {'room': room})
