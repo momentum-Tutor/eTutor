@@ -14,6 +14,7 @@ urlpatterns = [
     path('rooms/', etutor_views.all_rooms, name="all_rooms"),
     path('rooms/<slug:slug>', etutor_views.room_detail),
     url(r'token$', etutor_views.token, name="token"),
+    path('direct_message/<slug:slug>', etutor_views.direct_message)
     path('edit/', etutor_views.user_edit, name="user_edit"),
 ]
 
