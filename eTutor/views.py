@@ -58,3 +58,6 @@ def token(request):
     }
 
     return JsonResponse(response)
+
+def video_chat(request):
+    return render(request, 'eTutor/video_chat.html')
