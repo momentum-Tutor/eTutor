@@ -32,7 +32,7 @@ $.getJSON(
     },
     function (data) {
         username = data.identity;
-        printInfo("Loading chat...");
+        printInfo("Loading...");
 
         // Initialize the Chat client
         Twilio.Chat.Client.create(data.token).then(client => {
@@ -48,8 +48,6 @@ $.getJSON(
 function createOrJoinChannel() {
     // Extract the room's channel name from the page URL
     let channelName = window.location.pathname.split("/").slice()[2]
-
-    printInfo(`Attempting to join the "${channelName}" chat channel...`);
 
     chatClient
         .getChannelByUniqueName(channelName)
@@ -99,6 +97,7 @@ function processPage(page) {
         page.nextPage().then(processPage);
     } else {
         console.log("Done loading messages");
+        printInfo("You have successfully joined the chat")
     }
 }
 

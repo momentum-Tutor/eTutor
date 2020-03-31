@@ -59,5 +59,14 @@ def token(request):
 
     return JsonResponse(response)
 
+@login_required
 def direct_message(request, slug):
-    return render(request, 'eTutor/direct_message.html')
+    try:
+        room = Room.objects.get(slug=slug)
+        print('room retrieved')
+        print(request.method)
+    except Room.DoesNotExist:
+        room = Room(name=slug, description=slug, slug=slug)
+        room.save()
+        print("room created")
+    return render(request, 'eTutor/messaging_detail.html', {'room': room})
