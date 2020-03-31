@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-import json
+from django.http import JsonResponse
 from .models import Room
 from users.models import User
 from django.conf import settings
@@ -18,11 +18,11 @@ def homePage(request):
 def logout(request):
     return render(request, 'eTutor/homepage.html')
 
-
 def usersPage(request):
     allusers = User.objects.all()
     return render(request, 'eTutor/all_users.html', {'allusers': allusers})
 
+@login_required
 def all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'eTutor/messaging.html', {'rooms': rooms})
@@ -58,3 +58,6 @@ def token(request):
     }
 
     return JsonResponse(response)
+
+def direct_message(request, slug):
+    return render(request, 'eTutor/direct_message.html')

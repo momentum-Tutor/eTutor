@@ -2,45 +2,47 @@
 {% load static %}
 
 {% block content %}
-<article class="mw5 fl bg-white br3 pa4-ns mv3 ba b--black-10">
-    <div class="tc">
-        <img src="http://tachyons.io/img/avatar_1.jpg" class="br-100 h3 w3 dib" title="Photo of a kitty staring at you">
-        <h1 class="f4">Mimi Whitehouse</h1>
-        <hr class="mw3 bb bw1 b--black-10">
+<div class="mw7 tc center">
+    <article class="mw5 fl bg-white br3 pa4-ns mv3 ba b--black-10">
+        <div class="tc">
+            <img src="http://tachyons.io/img/avatar_1.jpg" class="br-100 h3 w3 dib"
+                title="Photo of a kitty staring at you">
+            <h1 class="f4">Mimi Whitehouse</h1>
+            <hr class="mw3 bb bw1 b--black-10">
 
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-    </div>
-    <p class="lh-copy measure center f6 black-70">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </div>
+        <p class="lh-copy measure center f6 black-70">
 
-    </p>
+        </p>
 
-    <article class="dt w-100 bb b--black-05 pb2 mt2">
-        <div class="dtc v-mid pl3">
-            <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Primary Language</h1>
-            <h2 class="f6 fw5 mt0 mb0 black-70">{{user.primary_language.name}}</h2>
+        <article class="dt w-100 bb b--black-05 pb2 mt2">
+            <div class="dtc v-mid pl3">
+                <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Primary Language</h1>
+                <h2 class="f6 fw5 mt0 mb0 black-70">{{user.primary_language.name}}</h2>
+            </div>
+        </article>
+        <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+            <div class="dtc v-mid pl3">
+                <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages</h1>
+                <h2 class="f6 fw4 mt0 mb0 black-70">{{user.known_languages.name}}</h2>
+            </div>
+
+        </article>
+        <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+            <div class="dtc v-mid pl3">
+                <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn.</h1>
+                <h2 class="f6 fw4 mt0 mb0 black-60">{{user.wanted_languages.name}}</h2>
+            </div>
+
+        </article>
+        <div class="ph3">
+            <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black-80" href="#0">Update</a>
         </div>
     </article>
-    <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
-        <div class="dtc v-mid pl3">
-            <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages</h1>
-            <h2 class="f6 fw4 mt0 mb0 black-70">{{user.known_languages.name}}</h2>
-        </div>
-
-    </article>
-    <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
-        <div class="dtc v-mid pl3">
-            <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn.</h1>
-            <h2 class="f6 fw4 mt0 mb0 black-60">{{user.wanted_languages.name}}</h2>
-        </div>
-
-    </article>
-    <div class="ph3">
-        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black-80" href="#0">Update</a>
-    </div>
-</article>
-
+</div>
 {% endblock %}

@@ -1,6 +1,10 @@
+.messaging-container {
+    width: 75%;
+}
+
 .message-box {
     overflow-y: auto;
-    width:75%;
+    width: 100%;
     height: 500px;
     border: solid 1px;
     background-color: white;
@@ -9,4 +13,41 @@
 .message {
     overflow-wrap: break-word;
     word-wrap: break-word;
+}
+
+.username {
+    text-decoration: underline;
+}
+
+.me {
+    color: #0095E0;
+}
+
+.info-message {
+    opacity: 80%;
+    color: #666666
+}
+
+.message-container {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    border-top: solid 2px;
+    /* border-radius: 5px; */
+}
+
+.message-input {
+    width: calc(100% - 50px);
+    display: inline;
+    float: left;
+    height: 60px;
+}
+
+.message-button {
+    width: 50px;
+    vertical-align: top;
+    float: left;
+    border-radius: 0;
+    display: inline;
 }
