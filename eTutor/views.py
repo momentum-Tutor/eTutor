@@ -74,6 +74,7 @@ def token(request):
 
 def video_chat(request):
     return render(request, 'eTutor/video_chat.html')
+    
 @login_required
 def direct_message(request, slug):
     try:
