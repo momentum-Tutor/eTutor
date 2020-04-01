@@ -1,6 +1,8 @@
 from django import forms
+from django.db import models
 from registration.forms import RegistrationForm
-from .models import User
+from .models import User, Language
+
 
 class CustomRegistrationForm(RegistrationForm):
 
@@ -8,5 +10,8 @@ class CustomRegistrationForm(RegistrationForm):
         model = User
         fields = RegistrationForm.Meta.fields + ('primary_language', 'known_languages', 'wanted_languages', 'current_time_zone',)
 
+class UpdateUserForm(forms.ModelForm):
 
-        
+    class Meta:
+        model = User
+        fields=('primary_language', 'known_languages', 'wanted_languages',)
