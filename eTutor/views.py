@@ -88,3 +88,6 @@ def direct_message(request, slug):
         room.save()
         print("room created")
     return render(request, 'eTutor/messaging_detail.html', {'room': room})
+
+def friend_request(request):
+    pass
