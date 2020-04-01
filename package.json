@@ -1,0 +1,33 @@
+{
+  "name": "etutor",
+  "version": "1.0.0",
+  "description": "video chat application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momentum-Tutor/eTutor.git"
+  },
+  "author": "Austin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/momentum-Tutor/eTutor/issues"
+  },
+  "homepage": "https://github.com/momentum-Tutor/eTutor#readme",
+  "dependencies": {
+    "@twilio/webrtc": "^4.2.0",
+    "backoff": "^2.5.0",
+    "browserify": "^16.5.1",
+    "jquery": "^3.4.1",
+    "precond": "^0.2.3",
+    "twilio-video": "^2.3.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "window": "^4.2.7",
+    "ws": "^7.2.3",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

@@ -16,6 +16,7 @@ twilio = "*"
 python-dotenv = "*"
 django-registration-redux = "*"
 django-widget-tweaks = "*"
+nodeenv = "*"
 
 [requires]
 python_version = "3.8"

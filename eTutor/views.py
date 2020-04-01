@@ -7,7 +7,7 @@ from .models import Room
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
-from twilio.jwt.access_token.grants import ChatGrant
+from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
 
 
@@ -64,13 +64,18 @@ def token(request):
         chat_grant = ChatGrant(endpoint_id=endpoint,
                                service_sid=chat_service_sid)
         token.add_grant(chat_grant)
-
+    else:
+        grant = VideoGrant(room='Spanish')
+        token.add_grant(grant)
     response = {
         'identity': identity,
         'token': token.to_jwt().decode('utf-8')
     }
 
     return JsonResponse(response)
+
+def video_chat(request):
+    return render(request, 'eTutor/video_chat.html')
 
 @login_required
 def direct_message(request, slug):

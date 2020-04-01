@@ -13,6 +13,7 @@ urlpatterns = [
     path('users/', etutor_views.usersPage, name="all_users"),
     path('rooms/', etutor_views.all_rooms, name="all_rooms"),
     path('rooms/<slug:slug>', etutor_views.room_detail),
+    path('videoChat/', etutor_views.video_chat, name="video_chat"),
     url(r'token$', etutor_views.token, name="token"),
     path('direct_message/<slug:slug>', etutor_views.direct_message),
     path('edit/', etutor_views.user_edit, name="user_edit"),
