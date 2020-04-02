@@ -15,6 +15,8 @@ class Room(models.Model):
         return self.name
 
 class Friendship(models.Model):
-    requester = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='f_requester')
-    reciever = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='f_reciever')
-    accepted = models.BooleanField(default=False)
+    user_one = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_one', null=True, blank=True)
+    user_two = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_two', null=True, blank=True)
+    accepted_one = models.BooleanField(default=False)
+    accepted_two = models.BooleanField(default=False)
+    friends = models.BooleanField(default=False)

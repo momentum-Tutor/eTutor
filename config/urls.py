@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'token$', etutor_views.token, name="token"),
     path('direct_message/<slug:slug>', etutor_views.direct_message),
     path('edit/', etutor_views.user_edit, name="user_edit"),
+    path('users/friend_request', etutor_views.friend_request),
+    path('my_friends/', etutor_views.my_friends),
 ]
 
 if settings.DEBUG:
