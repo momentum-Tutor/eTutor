@@ -1,6 +1,5 @@
 let userSelector = document.querySelectorAll('#user-selector')
 let selfUser = document.querySelector('#self-user')
-let homeButton = document.querySelector('#home-button')
 
 for (let user of userSelector) {
     let username = user.innerText.split(" ")[0]
