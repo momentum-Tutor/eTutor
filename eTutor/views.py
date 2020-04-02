@@ -3,12 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room
+from .models import Room, Friendship
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
+from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 
 def homePage(request):
@@ -89,5 +91,32 @@ def direct_message(request, slug):
         print("room created")
     return render(request, 'eTutor/messaging_detail.html', {'room': room})
 
+@csrf_exempt
 def friend_request(request):
-    pass
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        user_one = User.objects.get(username=data.get('user_one'))
+        user_two = User.objects.get(username=data.get('user_two'))
+        if Friendship.objects.filter(user_one=user_one, user_two=user_two).exists():
+            print('exists')
+        else:
+            print('doesnt exist')
+            if data.get('accepted_one') == None:
+                accepted_two = bool(data.get('accepted_two'))
+                friendship = Friendship(user_one=user_one, user_two=user_two, accepted_two=accepted_two)
+                friendship.save()
+            else:
+                accepted_one = bool(data.get('accepted_one'))
+                friendship = Friendship(user_one=user_one, user_two=user_two, accepted_one=accepted_one)
+                friendship.save()
+
+
+        response = {"response": "response"}
+        
+        return JsonResponse(response)
+    
+
+def my_friends(request):
+    friend_list = Friendship.objects.filter(user_one=request.user, friends=True) | Friendship.objects.filter(user_two=request.user, friends=True)
+    
+    return render(request, 'eTutor/my_friends.html', {'friend_list': friend_list})

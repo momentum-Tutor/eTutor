@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block meta %}
+{% endblock meta %}
+
+{% block content %}
+<div class="tc">
+    <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+        <h2>My Friends</h2>
+
+        {% for friend in friend_list %}
+        <main class="mw6 center">
+            <ul class="dt w-100  pb2 mt2">
+                <li class="bb b--black-05">
+                    <div class="dtc v-mid pl3">
+                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_one.username}}</p>
+                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_two.username}}</p>
+                    </div>
+                </li>
+            </ul>
+        </main>
+        {% endfor %}
+    </article>
+</div>
+{% endblock content %}
