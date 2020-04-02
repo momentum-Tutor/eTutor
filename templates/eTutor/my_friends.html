@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block meta %}
+<script src="{% static 'js/my_friends.js' %}" defer></script>
 {% endblock meta %}
 
 {% block content %}
@@ -8,13 +9,35 @@
     <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
         <h2>My Friends</h2>
 
-        {% for friend in friend_list %}
+        {% for friend in friend_list_one %}
         <main class="mw6 center">
             <ul class="dt w-100  pb2 mt2">
-                <li class="bb b--black-05">
+                <li id='user-selector' class="bb b--black-05">
                     <div class="dtc v-mid pl3">
-                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_one.username}}</p>
-                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_two.username}}</p>
+                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_two.username}} &nbsp</p>
+                    </div>
+                    <div class="dtc v-mid pl6">
+                        <form class="w-100 tr">
+                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
+                            id='message-{{friend.user_two.username}}'>Message</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </main>
+        {% endfor %}
+        {% for friend in friend_list_two %}
+        <main class="mw6 center">
+            <ul class="dt w-100  pb2 mt2">
+                <li id='user-selector' class="bb b--black-05">
+                    <div class="dtc v-mid pl3">
+                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_one.username}} &nbsp</p>
+                    </div>
+                    <div class="dtc v-mid pl6">
+                        <form class="w-100 tr">
+                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
+                            id='message-{{friend.user_one.username}}'>Message</button>
+                        </form>
                     </div>
                 </li>
             </ul>
