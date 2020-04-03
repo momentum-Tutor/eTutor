@@ -237,7 +237,6 @@ article {
   border-bottom: solid 2px;
   background-color: #f7f7f7;
   padding: 20px; 
-  box-sizing: border-box;
 }
 
 .welcome-h1 {
@@ -254,7 +253,3 @@ article {
   border: 1px solid;
   border-color: black;
 }
-
-/* .height250 {
-  height: 250px;
-} */
