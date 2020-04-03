@@ -19,6 +19,7 @@ urlpatterns = [
     path('edit/', etutor_views.user_edit, name="user_edit"),
     path('users/friend_request', etutor_views.friend_request),
     path('my_friends/', etutor_views.my_friends),
+    path('friend_requests/', etutor_views.friend_requests),
 ]
 
 if settings.DEBUG:

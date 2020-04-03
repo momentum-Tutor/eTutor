@@ -120,3 +120,8 @@ def my_friends(request):
     friend_list_one = Friendship.objects.filter(user_one=request.user, friends=True)
     friend_list_two = Friendship.objects.filter(user_two=request.user, friends=True)
     return render(request, 'eTutor/my_friends.html', {'friend_list_one': friend_list_one, 'friend_list_two': friend_list_two})
+
+def friend_requests(request):
+    request_list_one = Friendship.objects.filter(user_one=request.user, friends=False, accepted_one=False)
+    request_list_two = Friendship.objects.filter(user_two=request.user, friends=False, accepted_two=False)
+    return render(request, 'eTutor/friend_requests.html', {'request_list_one': request_list_one, 'request_list_two': request_list_two})
