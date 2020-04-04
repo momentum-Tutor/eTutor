@@ -14,21 +14,20 @@ from django.db.models import Q
 
 
 def homePage(request):
-     user_id = self.request.GET.get('user_id')
-        user = User.objects.get(id = user_id)
-        like = self.request.GET.get('like')
-        dislike = self.request.GET.get('dislike')
-        if like:
-            user.likes += 1
-            user.save()
-        if dislike:
+     user_id = request.GET.get('user_id')
+     user = User.objects.get(id = user_id)
+     like = self.request.GET.get('like')
+     dislike = self.request.GET.get('dislike')
+     if like:
+        user.likes += 1
+        user.save()
+     if dislike:
             user.dislikes += 1
+            if request.user.is_authenticated:
+                return render(request, 'eTutor/homepage.html')
+            else: 
+                return render(request, 'eTutor/welcome_page.html')
             user.save()
-    if request.user.is_authenticated:
-        return render(request, 'eTutor/homepage.html')
-    else: 
-        return render(request, 'eTutor/welcome_page.html')
-
 def logout(request):
     return render(request, 'eTutor/homepage.html')
 
