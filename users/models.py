@@ -11,4 +11,7 @@ class User(AbstractUser):
     known_languages = models.ManyToManyField(to=Language, related_name='known_languages')
     wanted_languages = models.ManyToManyField(to=Language, related_name='wanted_languages')
     current_time_zone = models.CharField(max_length=100, blank=True, null=True)
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
+
 
