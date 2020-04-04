@@ -23,6 +23,7 @@ def homePage(request):
 def logout(request):
     return render(request, 'eTutor/homepage.html')
 
+@login_required
 def usersPage(request):
     allusers = User.objects.all()
     return render(request, 'eTutor/all_users.html', {'allusers': allusers})
@@ -38,6 +39,7 @@ def user_edit(request):
         form = UpdateUserForm(instance=request.user)
     return render(request, 'eTutor/update.html', {'form':form})
 
+@login_required
 def all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'eTutor/messaging.html', {'rooms': rooms})
@@ -76,6 +78,7 @@ def token(request):
 
     return JsonResponse(response)
 
+@login_required
 def video_chat(request):
     return render(request, 'eTutor/video_chat.html')
 
@@ -98,7 +101,34 @@ def friend_request(request):
         user_one = User.objects.get(username=data.get('user_one'))
         user_two = User.objects.get(username=data.get('user_two'))
         if Friendship.objects.filter(user_one=user_one, user_two=user_two).exists():
-            print('exists')
+            f = Friendship.objects.get(user_one=user_one, user_two=user_two)
+            if data.get('deleted') != None:
+                f.delete()
+                print('declined')
+                return JsonResponse({'friends': 'declined'})
+            elif data.get('accepted_one') == "True":
+                if f.accepted_one == True:
+                    print('exists')
+                    return JsonResponse({'friends': 'exists'})
+                else:
+                    accepted_one = bool(data.get('accepted_one'))
+                    f.accepted_one = accepted_one
+                    f.friends = True
+                    f.save()
+                    print('accepted')
+                    return JsonResponse({'friends': 'accepted'})
+            else:
+                if f.accepted_two == True:
+                    print('exists')
+                    return JsonResponse({'friends': 'exists'})
+                else:
+                    accepted_two = bool(data.get('accepted_two'))
+                    f.accepted_two = accepted_two
+                    f.friends = True
+                    f.save()
+                    print('accepted')
+                    return JsonResponse({'friends': 'accepted'})
+            
         else:
             print('doesnt exist')
             if data.get('accepted_one') == None:
@@ -109,18 +139,15 @@ def friend_request(request):
                 accepted_one = bool(data.get('accepted_one'))
                 friendship = Friendship(user_one=user_one, user_two=user_two, accepted_one=accepted_one)
                 friendship.save()
-
-
-        response = {"response": "response"}
-        
-        return JsonResponse(response)
+        return JsonResponse({'friends': 'sent'})
     
-
+@login_required
 def my_friends(request):
     friend_list_one = Friendship.objects.filter(user_one=request.user, friends=True)
     friend_list_two = Friendship.objects.filter(user_two=request.user, friends=True)
     return render(request, 'eTutor/my_friends.html', {'friend_list_one': friend_list_one, 'friend_list_two': friend_list_two})
 
+@login_required
 def friend_requests(request):
     request_list_one = Friendship.objects.filter(user_one=request.user, friends=False, accepted_one=False)
     request_list_two = Friendship.objects.filter(user_two=request.user, friends=False, accepted_two=False)
