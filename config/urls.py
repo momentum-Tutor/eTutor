@@ -18,6 +18,8 @@ urlpatterns = [
     path('direct_message/<slug:slug>', etutor_views.direct_message),
     path('edit/', etutor_views.user_edit, name="user_edit"),
     path('users/friend_request', etutor_views.friend_request),
+    path('users/like/<int:pk>', etutor_views.like, name="like"),
+    path('users/dislike/<int:pk>', etutor_views.dislike, name="dislike"),
     path('my_friends/', etutor_views.my_friends),
 ]
 
