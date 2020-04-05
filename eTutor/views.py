@@ -105,6 +105,16 @@ def friend_request(request):
             if data.get('deleted') != None:
                 f.delete()
                 print('declined')
+                if f.accepted_one == True:
+                    notifications = Notifications.objects.get(user=user_two)
+                    notifications.friend -= 1
+                    notifications.total -= 1
+                    notifications.save()
+                else:
+                    notifications = Notifications.objects.get(user=user_one)
+                    notifications.friend -= 1
+                    notifications.total -= 1
+                    notifications.save()
                 return JsonResponse({'friends': 'declined'})
             elif data.get('accepted_one') == "True":
                 if f.accepted_one == True:
@@ -115,6 +125,14 @@ def friend_request(request):
                     f.accepted_one = accepted_one
                     f.friends = True
                     f.save()
+                    sender_notif = Notifications.objects.get(user=user_two)
+                    sender_notif.friend += 1
+                    sender_notif.total += 1
+                    sender_notif.save()
+                    receiver_notif = Notifications.objects.get(user=user_one)
+                    receiver_notif.friend -= 1
+                    receiver_notif.total -= 1
+                    receiver_notif.save()
                     print('accepted')
                     return JsonResponse({'friends': 'accepted'})
             else:
@@ -126,6 +144,14 @@ def friend_request(request):
                     f.accepted_two = accepted_two
                     f.friends = True
                     f.save()
+                    sender_notif = Notifications.objects.get(user=user_one)
+                    sender_notif.friend += 1
+                    sender_notif.total += 1
+                    sender_notif.save()
+                    receiver_notif = Notifications.objects.get(user=user_two)
+                    receiver_notif.friend -= 1
+                    receiver_notif.total -= 1
+                    receiver_notif.save()
                     print('accepted')
                     return JsonResponse({'friends': 'accepted'})
             
@@ -142,8 +168,11 @@ def friend_request(request):
             else:
                 accepted_one = bool(data.get('accepted_one'))
                 friendship = Friendship(user_one=user_one, user_two=user_two, accepted_one=accepted_one)
-
                 friendship.save()
+                notifications = Notifications.objects.get(user=user_two)
+                notifications.total += 1
+                notifications.friend += 1
+                notifications.save()
         return JsonResponse({'friends': 'sent'})
     
 @login_required
