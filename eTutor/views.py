@@ -3,31 +3,23 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship
+from .models import Room, Friendship, LikeDislike
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.views.generic import View
 
 
 def homePage(request):
-     user_id = request.GET.get('user_id')
-     user = User.objects.get(id = user_id)
-     like = self.request.GET.get('like')
-     dislike = self.request.GET.get('dislike')
-     if like:
-        user.likes += 1
-        user.save()
-     if dislike:
-            user.dislikes += 1
-            if request.user.is_authenticated:
-                return render(request, 'eTutor/homepage.html')
-            else: 
-                return render(request, 'eTutor/welcome_page.html')
-            user.save()
+    allusers = User.objects.all()
+    if request.user.is_authenticated:
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
+    else: 
+        return render(request, 'eTutor/welcome_page.html')
+
 def logout(request):
     return render(request, 'eTutor/homepage.html')
 
@@ -128,3 +120,28 @@ def my_friends(request):
     friend_list_one = Friendship.objects.filter(user_one=request.user, friends=True)
     friend_list_two = Friendship.objects.filter(user_two=request.user, friends=True)
     return render(request, 'eTutor/my_friends.html', {'friend_list_one': friend_list_one, 'friend_list_two': friend_list_two})
+
+
+@csrf_exempt
+def like(request, pk):
+    if request.method == "POST":
+        user_one = request.user
+        user_two = User.objects.get(pk=pk)
+        LikeDislike.objects.create(user_one=user_one, user_two=user_two, like=True)
+
+        response = {"response": "liked"}
+        return JsonResponse(response)
+    
+@csrf_exempt
+def dislike(request, pk):
+    if request.method == "POST":
+        user_one = request.user
+        user_two = User.objects.get(pk=pk)
+        LikeDislike.objects.create(user_one=user_one, user_two=user_two, like=False)
+
+        response = {"response": "disliked"}
+        return JsonResponse(response)
+        
+    
+
+     

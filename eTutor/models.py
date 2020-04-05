@@ -20,3 +20,10 @@ class Friendship(models.Model):
     accepted_one = models.BooleanField(default=False)
     accepted_two = models.BooleanField(default=False)
     friends = models.BooleanField(default=False)
+
+
+class LikeDislike(models.Model):
+    user_one = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_ones', null=True, blank=True)
+    user_two = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_twos', null=True, blank=True)
+    like = models.BooleanField(default=True)
+    
