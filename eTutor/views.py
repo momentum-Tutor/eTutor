@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship
+from .models import Room, Friendship, Notifications
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
@@ -16,7 +16,7 @@ from django.db.models import Q
 def homePage(request):
     allusers = User.objects.all()
     if request.user.is_authenticated:
-        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers,})
     else: 
         return render(request, 'eTutor/welcome_page.html')
 
@@ -152,3 +152,8 @@ def friend_requests(request):
     request_list_one = Friendship.objects.filter(user_one=request.user, friends=False, accepted_one=False)
     request_list_two = Friendship.objects.filter(user_two=request.user, friends=False, accepted_two=False)
     return render(request, 'eTutor/friend_requests.html', {'request_list_one': request_list_one, 'request_list_two': request_list_two})
+    
+def get_notifications(request):
+    n, created = Notifications.objects.get_or_create(user=request.user)
+    data = {'total': n.total, 'dm': n.dm, 'friend': n.friend}
+    return JsonResponse(data)

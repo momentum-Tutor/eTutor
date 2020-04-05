@@ -1,4 +1,3 @@
-console.log('hello')
 let userSelector = document.querySelectorAll('#user-selector')
 let selfUser = document.querySelector('#self-user')
 

@@ -50,14 +50,14 @@
                     </li>
 
                     <li>
-                        <a href="#"><span class='notification'>3</span> Notifications</a>
+                        <a href="#"><span id='total-notification'></span> Notifications</a>
                         <ul class="nav-dropdown">
                             <li>
-                                <a href="#">Direct Messages</a>
+                                <a href="#"><span id='DM-notification'></span> Direct Messages</a>
                             </li>
 
                             <li>
-                                <a href="/friend_requests">Friend Requests</a>
+                                <a href="/friend_requests"><span id='FR-notification'></span> Friend Requests</a>
                             </li>
                         </ul>
                     </li>
@@ -83,6 +83,8 @@
             </nav>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
     {% else %}
     <nav class="dt w-100 border-box pa3 ph5-ns">
         <div class="dtc v-mid w-75 tr">
@@ -96,8 +98,6 @@
     {% endif  %}
         {% block content %}
         {% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
-    <script src="{% static 'js/main.js' %}" defer></script>
 </body>
 
 </html>
