@@ -73,4 +73,4 @@ function notifications() {
 }
 
 notifications()
-// setInterval(notifications, 5000)
+setInterval(notifications, 5000)

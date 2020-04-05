@@ -135,9 +135,14 @@ def friend_request(request):
                 accepted_two = bool(data.get('accepted_two'))
                 friendship = Friendship(user_one=user_one, user_two=user_two, accepted_two=accepted_two)
                 friendship.save()
+                notifications = Notifications.objects.get(user=user_one)
+                notifications.total += 1
+                notifications.friend += 1
+                notifications.save()
             else:
                 accepted_one = bool(data.get('accepted_one'))
                 friendship = Friendship(user_one=user_one, user_two=user_two, accepted_one=accepted_one)
+
                 friendship.save()
         return JsonResponse({'friends': 'sent'})
     
