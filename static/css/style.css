@@ -196,6 +196,14 @@ article {
   color: orange;
 }
 
+.notification {
+  padding-left: 2px;
+  padding-right: 3px;
+  border-radius: 2px;
+  background-color: red;
+  color: white;
+}
+
 .action-container {
   border-radius: 5px;
   border: solid 3px;

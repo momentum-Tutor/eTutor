@@ -21,6 +21,9 @@ urlpatterns = [
     path('users/like/<int:pk>', etutor_views.like, name="like"),
     path('users/dislike/<int:pk>', etutor_views.dislike, name="dislike"),
     path('my_friends/', etutor_views.my_friends),
+    path('friend_requests/', etutor_views.friend_requests),
+    path('notification/get/', etutor_views.get_notifications),
+    path('friend_requests/mark_read', etutor_views.mark_read),
 ]
 
 if settings.DEBUG:
