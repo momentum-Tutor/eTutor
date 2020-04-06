@@ -3,14 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship, Notifications
+from .models import Room, Friendship, Notifications, LikeDislike
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.views.generic import View
 
 
 def homePage(request):
@@ -213,3 +213,23 @@ def get_notifications(request):
     n, created = Notifications.objects.get_or_create(user=request.user)
     data = {'total': n.total, 'dm': n.dm, 'friend': n.friend}
     return JsonResponse(data)
+
+@csrf_exempt
+def like(request, pk):
+    if request.method == "POST":
+        user_one = request.user
+        user_two = User.objects.get(pk=pk)
+        LikeDislike.objects.create(user_one=user_one, user_two=user_two, like=True)
+
+        response = {"response": "liked"}
+        return JsonResponse(response)
+    
+@csrf_exempt
+def dislike(request, pk):
+    if request.method == "POST":
+        user_one = request.user
+        user_two = User.objects.get(pk=pk)
+        LikeDislike.objects.create(user_one=user_one, user_two=user_two, like=False)
+
+        response = {"response": "disliked"}
+        return JsonResponse(response)

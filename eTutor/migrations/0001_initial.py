@@ -12,16 +12,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Friendship',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('accepted_one', models.BooleanField(default=False)),
-                ('accepted_two', models.BooleanField(default=False)),
-                ('friends', models.BooleanField(default=False)),
-                ('new', models.BooleanField(default=False)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Language',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

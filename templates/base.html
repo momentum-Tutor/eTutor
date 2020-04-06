@@ -86,12 +86,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
     <script src="{% static 'js/main.js' %}" defer></script>
     {% else %}
-    <nav class="dt w-100 border-box pa3 ph5-ns">
-        <div class="dtc v-mid w-75 tr">
-            <a class="link dim dark-gray f4 f5-ns dib mr3 mr4-ns" href="{% url 'homepage' %}" title="About">Home</a>
-            <a class="link dim dark-gray f4 f5-ns dib mr3 mr4-ns" href="/accounts/login/"
+    <nav class="dt border-box pa3 ph5-ns">
+        <div class="dtc v-mid tr action-container">
+            <a class="link dim tc white f4 f5-ns dib action-button" href="/accounts/login/"
                 title="Store">Login</a>
-            <a class="link dim dark-gray f4 f5-ns dib mr3 mr4-ns" href="/accounts/register/"
+            <a class="link dim tc white f4 f5-ns dib action-button border-left" href="/accounts/register/"
                 title="Store">Register</a>
         </div>
     </nav>

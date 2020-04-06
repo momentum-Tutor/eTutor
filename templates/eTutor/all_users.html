@@ -5,35 +5,54 @@
 {% endblock meta %}
 
 {% block content %}
+
 <div class="tc">
-<article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
 
-    <h2>All Users</h2>
+    <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
 
-    {% for user in allusers %}
-    {% if user.wanted_languages %}
-    <main class="mw6 center">
-        <ul id="usersList" class="dt w-100  pb2 mt2">
-            <li id='user-selector' class="bb b--black-05">
-                <div class="dtc v-mid pl3">
-                    <a class="f5 fw6 db black link dim" href="">{{user}} &nbsp</a>
-                    <p class="f6 fw4 mt0 mb0 black-80">Primary Languages: {{user.primary_language.name}}</p>
-                    <p class="f6 fw4 mt0 mb0 black-80">Wanted Language: {{user.wanted_languages.name}}</p>
-                </div>
-                <div class="dtc v-mid pl6">
-                    <form class="w-100 tr">
-                        <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button' id='friend-{{user}}'>Friend Request
-                        </button>
-                        <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button' id='message-{{user}}'>Message</button>
-                    </form>
-                </div>
-            </li>
-        </ul>
-    </main>
+        <h2>All Users</h2>
 
-    {% endif %}
-    {% endfor %}
+        {% for user in allusers %}
+        {% if user.wanted_languages %}
+        <main class="mw6 center">
+            <ul class="userInfo" class="dt w-100  pb2 mt2">
+                <li id='user-selector' class="bb b--black-05">
+                    <div id='{{user}}' class="dtc v-mid pl3">
+                        <a class="f5 fw6 db black link dim" href="">{{user}}</a>
+                        <p class="f6 fw4 mt0 mb0 black-80">Primary Languages: {{user.primary_language.name}}</p>
+                        <p class="f6 fw4 mt0 mb0 black-80">Wanted Language: {{user.wanted_languages.name}}</p>
 
-</article>
+                        <div class="dtc v-mid pl6">
+                            <form class="w-100 tr">
+                                {% csrf_token %}
+
+                                <button data-user='{{user.id}}'
+                                    class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                    type='button'>Like
+                                </button>
+                                <button data-user='{{user.id}}'
+                                    class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                    type='button'>Dislike</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="dtc v-mid pl6">
+                        <form class="w-100 tr">
+                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                type='button' id='friend-{{user}}'>Friend Request
+                            </button>
+                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                type='button' id='message-{{user}}'>Message</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </main>
+
+        {% endif %}
+        {% endfor %}
+
+    </article>
 </div>
 {% endblock %}
