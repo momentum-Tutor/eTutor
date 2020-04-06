@@ -18,24 +18,9 @@
             <ul class="userInfo" class="dt w-100  pb2 mt2">
                 <li id='user-selector' class="bb b--black-05">
                     <div id='{{user}}' class="dtc v-mid pl3">
-                        <a class="f5 fw6 db black link dim" href="">{{user}}</a>
+                        <a class="f5 fw6 db black link dim" href="">{{user}} &nbsp</a>
                         <p class="f6 fw4 mt0 mb0 black-80">Primary Languages: {{user.primary_language.name}}</p>
                         <p class="f6 fw4 mt0 mb0 black-80">Wanted Language: {{user.wanted_languages.name}}</p>
-
-                        <div class="dtc v-mid pl6">
-                            <form class="w-100 tr">
-                                {% csrf_token %}
-
-                                <button data-user='{{user.id}}'
-                                    class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
-                                    type='button'>Like
-                                </button>
-                                <button data-user='{{user.id}}'
-                                    class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
-                                    type='button'>Dislike</button>
-
-                            </form>
-                        </div>
                     </div>
                     <div class="dtc v-mid pl6">
                         <form class="w-100 tr">
@@ -44,6 +29,13 @@
                             </button>
                             <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button' id='message-{{user}}'>Message</button>
+                            <button data-user='{{user.id}}'
+                                class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                type='button'>Like
+                            </button>
+                            <button data-user='{{user.id}}'
+                                class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                type='button'>Dislike</button>
                         </form>
                     </div>
                 </li>

@@ -4,6 +4,8 @@ let selfUser = document.querySelector('#self-user')
 for (let user of userSelector) {
     let username = user.innerText.split(" ")[0]
     let generatedMessageSelector = document.querySelector(`#message-${username}`)
+    console.log(user)
+    console.log(username)
     let generatedFriendSelector = document.querySelector(`#friend-${username}`)
     generatedMessageSelector.addEventListener('click', function () {
         let arr = [username, selfUser.innerText]
