@@ -21,6 +21,7 @@ urlpatterns = [
     path('my_friends/', etutor_views.my_friends),
     path('friend_requests/', etutor_views.friend_requests),
     path('notification/get/', etutor_views.get_notifications),
+    path('friend_requests/mark_read', etutor_views.mark_read),
 ]
 
 if settings.DEBUG:

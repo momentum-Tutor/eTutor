@@ -124,6 +124,8 @@ def friend_request(request):
                     accepted_one = bool(data.get('accepted_one'))
                     f.accepted_one = accepted_one
                     f.friends = True
+                    f.new = True
+                    f.accepted_notification = User.objects.get(username=user_two)
                     f.save()
                     sender_notif = Notifications.objects.get(user=user_two)
                     sender_notif.friend += 1
@@ -143,6 +145,8 @@ def friend_request(request):
                     accepted_two = bool(data.get('accepted_two'))
                     f.accepted_two = accepted_two
                     f.friends = True
+                    f.new = True
+                    f.accepted_notification = User.objects.get(username=user_one)
                     f.save()
                     sender_notif = Notifications.objects.get(user=user_one)
                     sender_notif.friend += 1
@@ -185,7 +189,25 @@ def my_friends(request):
 def friend_requests(request):
     request_list_one = Friendship.objects.filter(user_one=request.user, friends=False, accepted_one=False)
     request_list_two = Friendship.objects.filter(user_two=request.user, friends=False, accepted_two=False)
-    return render(request, 'eTutor/friend_requests.html', {'request_list_one': request_list_one, 'request_list_two': request_list_two})
+    new_list = Friendship.objects.filter(new=True, accepted_notification=request.user)
+    return render(request, 'eTutor/friend_requests.html', {'request_list_one': request_list_one, 'request_list_two': request_list_two, 'new_list': new_list})
+
+@csrf_exempt    
+def mark_read(request):
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
+        user_one = User.objects.get(username=data.get('user_one'))
+        user_two = User.objects.get(username=data.get('user_two'))
+        friendship = Friendship.objects.get(user_one=user_one, user_two=user_two)
+        if friendship.new == False:
+            return JsonResponse({'mark_read': 'already marked read'})
+        friendship.new = False
+        friendship.save()
+        notifications = Notifications.objects.get(user=request.user)
+        notifications.total -= 1
+        notifications.friend -= 1
+        notifications.save()
+        return JsonResponse({'mark_read': 'did a thing'})
     
 def get_notifications(request):
     n, created = Notifications.objects.get_or_create(user=request.user)

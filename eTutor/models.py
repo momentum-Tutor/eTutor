@@ -21,6 +21,11 @@ class Friendship(models.Model):
     accepted_one = models.BooleanField(default=False)
     accepted_two = models.BooleanField(default=False)
     friends = models.BooleanField(default=False)
+    new = models.BooleanField(default=False)
+    accepted_notification = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='accepted_notification', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user_one.username} and {self.user_two.username}'
 
 class Notifications(models.Model):
     video = models.PositiveIntegerField(default=0)
@@ -28,3 +33,6 @@ class Notifications(models.Model):
     friend = models.PositiveIntegerField(default=0)
     total = models.PositiveIntegerField(default=0)
     user = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='notification', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username

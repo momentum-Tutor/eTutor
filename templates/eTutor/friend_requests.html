@@ -7,7 +7,24 @@
 <div class="tc">
     <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
         <h2>Friend Requests</h2>
-
+        {% for new in new_list %}
+        <main class="mw6 center">
+            <ul class="dt w-100  pb2 mt2">
+                <li id='new-selector' class="bb b--black-05">
+                    <div class="dtc v-mid pl3">
+                        <p id='new-name-1' class="f5 fw6 db black link dim">{{new.user_one}} accepted your friend request!</p>
+                        <p id='new-name-2' class="f5 fw6 db black link dim">{{new.user_two}} accepted your friend request!</p>
+                    </div>
+                    <div class="dtc v-mid pl6">
+                        <form class="w-100 tr">
+                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
+                            id='mark-read'>Mark as read</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </main>
+        {% endfor %}
         {% for friend_request in request_list_one %}
         <main class="mw6 center">
             <ul class="dt w-100  pb2 mt2">
