@@ -11,3 +11,4 @@ for (let user of userSelector) {
         window.location.href = "/direct_message/" + arr[0] + arr[1]
     })
 }
+

@@ -15,12 +15,13 @@
 <body>
     {% if request.user.is_authenticated %}
     <section class="nav-bar">
+
         <div class="nav-container">
             <div class="logo">
-                <a href="{% url 'homepage' %}">Logo</a>
+                <a href="{% url 'homepage' %}">eTutor</a>
             </div>
-
             <nav>
+
                 <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
                 <ul class="nav-list">
                     <li class="searchBar">

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block meta %}
-<script src="{% static 'js/all_user2s.js' %}" defer></script>
+<script src="{% static 'js/all_users.js' %}" defer></script>
+<script src="{% static 'js/like.js' %}" defer></script>
 {% endblock meta %}
 
 {% block content %}
@@ -24,16 +25,16 @@
 
                     <div id='{{user}}' class="dtc v-mid pl3">
                         <a class="f5 fw6 db black link dim" href="">{{user2}} &nbsp</a>
-                        <h2 class="f6 fw4 mt0 mb0 black-90">Primary Language: {{user2.primary_language.name}}</h2>
+                        <p class="f6 fw4 mt0 mb0 black-90">Primary Language: {{user2.primary_language.name}}</p>
                         {% if user2.known_languages %}
                         <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages:</h1>
                         {% for language in user2.known_languages.all %}
-                        <h2 class="f6 fw4 mt0 mb0 black-60">{{language.name}}</h2>
+                        <p class="f6 fw4 mt0 mb0 black-60">{{language.name}}</p>
                         {% endfor %}
                         {% endif %}
                         <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn:</h1>
                         {% for language in user2.wanted_languages.all %}
-                        <h2 class="f6 fw4 mt0 mb0 black-60">{{language.name}}</h2>
+                        <p class="f6 fw4 mt0 mb0 black-60">{{language.name}}</p>
                         {% endfor %}
                         <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">{{user2.current_time_zone.name }}</h1>
 
@@ -46,11 +47,11 @@
                             </button>
                             <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button' id='message-{{user2}}'>Message</button>
-                            <button data-user2='{{user2.id}}'
+                            <button data-user='{{user2.id}}'
                                 class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Like
                             </button>
-                            <button data-user2='{{user2.id}}'
+                            <button data-user='{{user2.id}}'
                                 class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Dislike</button>
                         </form>
