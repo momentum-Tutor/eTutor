@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship, Notifications, LikeDislike, Language, Room_Users
+from .models import Room, Friendship, Notifications, LikeDislike, Language, Room_Users, DM_Notifications
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
@@ -265,3 +265,32 @@ def dislike(request, pk):
         response = {"response": "disliked"}
         return JsonResponse(response)
 
+@csrf_exempt
+def new_dm(request, slug):
+    if request.method == 'POST':
+        users = slug.split('SPL')
+        if users[0] == request.user.username:
+            username_value = users[1]
+        if users[1] == request.user.username:
+            username_value = users[0]
+        try:
+            dm_notif = DM_Notifications.objects.get(room=Room.objects.get(slug=slug), user=User.objects.get(username=username_value))
+            if dm_notif.new == True:
+                return JsonResponse({'notification': 'unread'})
+            else:
+                dm_notif.new == True
+                dm_notif.save()
+                notification = Notifications.objects.get(user=User.objects.get(username=username_value))
+                notification.dm += 1
+                notification.total += 1
+                notification.save()
+                return JsonResponse({'notification': 'set true'})
+        except DM_Notifications.DoesNotExist:
+            room = Room.objects.get(slug=slug)
+            dm_notif = DM_Notifications(room=room, new=True, user=User.objects.get(username=username_value))
+            dm_notif.save()
+            notification = Notifications.objects.get(user=User.objects.get(username=username_value))
+            notification.dm += 1
+            notification.total += 1
+            notification.save()
+            return JsonResponse({'notification': 'created'})

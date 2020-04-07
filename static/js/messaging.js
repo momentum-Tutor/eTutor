@@ -111,6 +111,9 @@ $form.on("submit", function (e) {
     if (roomChannel && $input.val().trim().length > 0) {
         roomChannel.sendMessage($input.val());
         $input.val("");
+        if (roomPrivacy.textContent == 'True') {
+            newNotification()
+        }
     }
 });
 
@@ -122,6 +125,19 @@ if (roomPrivacy.textContent == 'True') {
         headers: { 'Content-type': 'application.json', },
         body: JSON.stringify(data)
     })
+        .then((response) => response.json())
+        .then(response => {
+            console.log("mark read JSON response received")
+            console.log(response)
+        })
+        .catch((error) => {
+            console.error('mark read JSON response ERROR')
+        })
+}
+
+function newNotification() {
+    let userUsernames = roomName.textContent.split(' ')
+    fetch(`/rooms/${userUsernames[0]}SPL${userUsernames[1]}/new_dm/`, {method: 'POST'})
         .then((response) => response.json())
         .then(response => {
             console.log("mark read JSON response received")

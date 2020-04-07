@@ -26,6 +26,7 @@ urlpatterns = [
     path('friend_requests/', etutor_views.friend_requests),
     path('notification/get/', etutor_views.get_notifications),
     path('friend_requests/mark_read', etutor_views.mark_read),
+    path('rooms/<slug:slug>/new_dm/', etutor_views.new_dm),
 ]
 
 if settings.DEBUG:
