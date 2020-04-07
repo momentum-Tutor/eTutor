@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship, Notifications, LikeDislike
+from .models import Room, Friendship, Notifications, LikeDislike, Language
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
@@ -11,12 +11,14 @@ from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-
+from datetime import datetime, timedelta
+from pytz import timezone
+import pytz
 
 def homePage(request):
     allusers = User.objects.all()
     if request.user.is_authenticated:
-        return render(request, 'eTutor/homepage.html', {'allusers': allusers,})
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
     else: 
         return render(request, 'eTutor/welcome_page.html')
 
@@ -25,8 +27,18 @@ def logout(request):
 
 @login_required
 def usersPage(request):
+    # user = request.user
+    # my_tz = user.current_time_zone.name
+    # my_mnt = datetime.datetime.now()
+    # my_tz = pytz.timezone(my_tz)
+    # my_mnt = my_tz.localize(my_mnt)
     allusers = User.objects.all()
-    return render(request, 'eTutor/all_users.html', {'allusers': allusers})
+    for user in allusers:
+        # user_mnt = datetime.datetime.now()
+        # user_tz = user.current_time_zone.name
+        # user_tz = pytz.timezone(user_tz)
+        # user_mnt = user_tz.localize(user_mnt)
+        return render(request, 'eTutor/all_users.html', {'allusers': allusers})
 
 @login_required
 def user_edit(request):
@@ -233,3 +245,4 @@ def dislike(request, pk):
 
         response = {"response": "disliked"}
         return JsonResponse(response)
+

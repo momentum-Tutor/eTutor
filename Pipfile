@@ -17,6 +17,7 @@ django-widget-tweaks = "*"
 nodeenv = "*"
 Django = "*"
 Werkzeug = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.8"

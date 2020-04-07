@@ -41,3 +41,10 @@ class LikeDislike(models.Model):
     user_one = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_ones', null=True, blank=True)
     user_two = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_twos', null=True, blank=True)
     like = models.BooleanField(default=True)
+
+
+class TimeZone(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.name}"

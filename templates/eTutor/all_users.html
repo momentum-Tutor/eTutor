@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block meta %}
-<script src="{% static 'js/all_users.js' %}" defer></script>
+<script src="{% static 'js/all_user2s.js' %}" defer></script>
 {% endblock meta %}
 
 {% block content %}
@@ -10,30 +10,47 @@
 
     <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
 
-        <h2>All Users</h2>
+        <h2>All Users:</h2>
 
-        {% for user in allusers %}
-        {% if user.wanted_languages %}
+
+
+
+        {% for user2 in allusers %}
+        {% if user2 != user %}
+
         <main class="mw6 center">
             <ul class="userInfo" class="dt w-100  pb2 mt2">
                 <li id='user-selector' class="bb b--black-05">
+
                     <div id='{{user}}' class="dtc v-mid pl3">
-                        <a class="f5 fw6 db black link dim" href="">{{user}} &nbsp</a>
-                        <p class="f6 fw4 mt0 mb0 black-80">Primary Languages: {{user.primary_language.name}}</p>
-                        <p class="f6 fw4 mt0 mb0 black-80">Wanted Language: {{user.wanted_languages.name}}</p>
+                        <a class="f5 fw6 db black link dim" href="">{{user2}} &nbsp</a>
+                        <h2 class="f6 fw4 mt0 mb0 black-90">Primary Language: {{user2.primary_language.name}}</h2>
+                        {% if user2.known_languages %}
+                        <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages:</h1>
+                        {% for language in user2.known_languages.all %}
+                        <h2 class="f6 fw4 mt0 mb0 black-60">{{language.name}}</h2>
+                        {% endfor %}
+                        {% endif %}
+                        <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn:</h1>
+                        {% for language in user2.wanted_languages.all %}
+                        <h2 class="f6 fw4 mt0 mb0 black-60">{{language.name}}</h2>
+                        {% endfor %}
+                        <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">{{user2.current_time_zone.name }}</h1>
+
+
                     </div>
                     <div class="dtc v-mid pl6">
                         <form class="w-100 tr">
                             <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
-                                type='button' id='friend-{{user}}'>Friend Request
+                                type='button' id='friend-{{user2}}'>Friend Request
                             </button>
                             <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
-                                type='button' id='message-{{user}}'>Message</button>
-                            <button data-user='{{user.id}}'
+                                type='button' id='message-{{user2}}'>Message</button>
+                            <button data-user2='{{user2.id}}'
                                 class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Like
                             </button>
-                            <button data-user='{{user.id}}'
+                            <button data-user2='{{user2.id}}'
                                 class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Dislike</button>
                         </form>
@@ -44,6 +61,8 @@
 
         {% endif %}
         {% endfor %}
+
+
 
     </article>
 </div>
