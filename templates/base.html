@@ -31,7 +31,16 @@
                         <a href="{% url 'homepage' %}">Home</a>
                     </li>
                     <li>
-                        <a href="{% url 'all_rooms' %}">Chat</a>
+                        <a href="#">Chat</a>
+                        <ul class="nav-dropdown">
+                            <li>
+                                <a href="#">Ditect Messages</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Public Rooms</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{% url 'video_chat' %}">Video Call</a>
@@ -61,10 +70,6 @@
                             </li>
                         </ul>
                     </li>
-
-                    <li>
-                        <a href="#!">About</a>
-                    </li>
                     <li>
                         {% if request.user.is_authenticated %}
                         <a id='self-user' href="#">{{ request.user.username }}</a>
@@ -88,15 +93,14 @@
     {% else %}
     <nav class="dt border-box pa3 ph5-ns">
         <div class="dtc v-mid tr action-container">
-            <a class="link dim tc white f4 f5-ns dib action-button" href="/accounts/login/"
-                title="Store">Login</a>
+            <a class="link dim tc white f4 f5-ns dib action-button" href="/accounts/login/" title="Store">Login</a>
             <a class="link dim tc white f4 f5-ns dib action-button border-left" href="/accounts/register/"
                 title="Store">Register</a>
         </div>
     </nav>
     {% endif  %}
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
 </body>
 
 </html>
