@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
+<link rel="stylesheet" href="{% static '/css/rooms-list.css' %}">
 {% endblock meta %}
 {% block content %}
-
+<h2 class='general-header'>Public Chat Rooms</h2>
   <section class="section">
     <div class="container">
       <div class="columns">

@@ -11,8 +11,7 @@
 {% block content %}
 
 <div>
-    <h2>{{room.name}}</h2>
-    <p>{{room.description}}</p>
+    <h2>{{room.description}}</h2>
 </div>
 
 <div class='messaging-container'>
@@ -25,5 +24,6 @@
         </div>
     </form>
 </div>
-
+<p id='room-name' class='hidden'>{{room.name}}</p>
+<p id='room-privacy' class='hidden'>{{room.private}}</p>
 {% endblock content %}

@@ -2,6 +2,8 @@ let $chatWindow = $("#messages");
 let chatClient;
 let roomChannel;
 let username;
+let roomName = document.querySelector('#room-name')
+let roomPrivacy = document.querySelector('#room-privacy')
 
 function printInfo(infoMessage, asHtml) {
     let $msg = $('<div class="info-message">');
@@ -77,7 +79,7 @@ function setupChannel(name) {
     } else {
         roomChannel.join().then(function (channel) {
             printInfo(
-                `Joined channel ${name} as <span class="me"> ${username} </span>.`,
+                `Joined channel as <span class="me"> ${username} </span>.`,
                 true
             );
             channel.getMessages(30).then(processPage);
@@ -111,3 +113,21 @@ $form.on("submit", function (e) {
         $input.val("");
     }
 });
+
+if (roomPrivacy.textContent == 'True') {
+    let userUsernames = roomName.textContent.split(' ')
+    let data = { user_one: userUsernames[0], user_two: userUsernames[1] }
+    fetch(`/rooms/${userUsernames[0]}SPL${userUsernames[1]}/dm_users/`, {
+        method: 'POST',
+        headers: { 'Content-type': 'application.json', },
+        body: JSON.stringify(data)
+    })
+        .then((response) => response.json())
+        .then(response => {
+            console.log("mark read JSON response received")
+            console.log(response)
+        })
+        .catch((error) => {
+            console.error('mark read JSON response ERROR')
+        })
+}

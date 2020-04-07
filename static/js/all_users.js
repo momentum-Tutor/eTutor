@@ -4,13 +4,11 @@ let selfUser = document.querySelector('#self-user')
 for (let user of userSelector) {
     let username = user.innerText.split(" ")[0]
     let generatedMessageSelector = document.querySelector(`#message-${username}`)
-    console.log(user)
-    console.log(username)
     let generatedFriendSelector = document.querySelector(`#friend-${username}`)
     generatedMessageSelector.addEventListener('click', function () {
         let arr = [username, selfUser.innerText]
         arr.sort()
-        window.location.href = "/direct_message/" + arr[0] + arr[1]
+        window.location.href = `/direct_message/${arr[0]}SPL${arr[1]}`
     })
     generatedFriendSelector.addEventListener('click', function () {
         let arr = [username, selfUser.innerText]
