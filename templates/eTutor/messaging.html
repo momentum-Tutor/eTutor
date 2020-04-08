@@ -1,29 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" /> -->
+<link rel="stylesheet" href="{% static '/css/rooms-list.css' %}">
 {% endblock meta %}
 {% block content %}
-
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        {% for room in rooms %}
-        <div class="column">
-          <div class="card rounded-edges">
-            <div class="card-content">
-              <p class="title is-4">{{room.name}}</p>
-              <div class="content">
-                <p>
-                  {{room.description}}
-                </p>
-                <a href="/rooms/{{room.slug}}" class="button">Join Room</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
+<div class='room-list-header'>
+  <h2 class='general-header'>Public Chat Rooms</h2>
+</div>
+<div class="container">
+  {% for room in rooms %}
+  <div class="card">
+    <h3>{{room.description}}</h3>
+    <div class="content">
+      <a href="/rooms/{{room.slug}}" class="messages-button">Join Room</a>
     </div>
-  </section>
+  </div>
+  {% endfor %}
+</div>
 {% endblock content %}

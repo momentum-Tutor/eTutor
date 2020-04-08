@@ -201,12 +201,14 @@ article {
   color: orange;
 }
 
-.notification {
+.etutor-notification {
   padding-left: 2px;
-  padding-right: 3px;
+  padding-right: 2px;
   border-radius: 2px;
+  max-height: 20px;
   background-color: red;
   color: white;
+  text-align: center;
 }
 
 .action-container {

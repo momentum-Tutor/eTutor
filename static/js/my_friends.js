@@ -8,7 +8,7 @@ for (let user of userSelector) {
     generatedMessageSelector.addEventListener('click', function () {
         let arr = [username, selfUser.innerText]
         arr.sort()
-        window.location.href = "/direct_message/" + arr[0] + arr[1]
+        window.location.href = `/direct_message/${arr[0]}SPL${arr[1]}`
     })
 }
 

@@ -11,8 +11,11 @@ urlpatterns = [
     path('', etutor_views.homePage, name="homepage"),
     path('accounts/', include('registration.backends.simple.urls')),
     path('users/', etutor_views.usersPage, name="all_users"),
-    path('rooms/', etutor_views.all_rooms, name="all_rooms"),
+    path('rooms/', etutor_views.public_rooms, name="all_rooms"),
+    path('my_dms/', etutor_views.my_dms),
     path('rooms/<slug:slug>', etutor_views.room_detail),
+    path('rooms/<slug:slug>/dm_users/', etutor_views.dm_users),
+    path('rooms/<slug:slug>/message_read/', etutor_views.message_read),
     path('videoChat/', etutor_views.video_chat, name="video_chat"),
     url(r'token$', etutor_views.token, name="token"),
     path('direct_message/<slug:slug>', etutor_views.direct_message),
@@ -24,6 +27,7 @@ urlpatterns = [
     path('friend_requests/', etutor_views.friend_requests),
     path('notification/get/', etutor_views.get_notifications),
     path('friend_requests/mark_read', etutor_views.mark_read),
+    path('rooms/<slug:slug>/new_dm/', etutor_views.new_dm),
 ]
 
 if settings.DEBUG:

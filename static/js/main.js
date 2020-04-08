@@ -46,27 +46,27 @@ function notifications() {
 })
   function displayNotifications(data) {
     if (data.total > 0) {
-      totalNotification.setAttribute('class', 'notification')
+      totalNotification.setAttribute('class', 'etutor-notification')
       totalNotification.innerText = data.total
     }
     else {
-      totalNotification.classList.remove('notification')
+      totalNotification.classList.remove('etutor-notification')
       totalNotification.innerText = ''
     }
     if (data.total > 0) {
-      dmNotification.setAttribute('class', 'notification')
+      dmNotification.setAttribute('class', 'etutor-notification')
       dmNotification.innerText = data.dm
     }
     else {
-      dmNotification.classList.remove('notification')
+      dmNotification.classList.remove('etutor-notification')
       dmNotification.innerText = ''
     }
     if (data.total > 0) {
-      frNotification.setAttribute('class', 'notification')
+      frNotification.setAttribute('class', 'etutor-notification')
       frNotification.innerText = data.friend
     }
     else {
-      frNotification.classList.remove('notification')
+      frNotification.classList.remove('etutor-notification')
       frNotification.innerText = ''
     }
     
@@ -74,4 +74,4 @@ function notifications() {
 }
 
 notifications()
-// setInterval(notifications, 3000)
+setInterval(notifications, 5000)
