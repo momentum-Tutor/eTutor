@@ -1,12 +1,13 @@
 .general-header {
     text-align: center;
-    color: black;
+    color: #f7f7f7;
     font-size: 2.5rem;
     background-color: #0095E0;
     /* width: 800px; */
     border: solid 2px;
     border-radius: 5px;
     padding: 20px;
+    border-color: black;
 }
 
 .container {
