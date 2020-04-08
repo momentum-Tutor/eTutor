@@ -12,7 +12,7 @@ ul li {
 
 .nav-bar {
   height: 70px;
-  background: #0c5055;
+  background: #0095E0;
 }
 
 .logo {
@@ -56,7 +56,7 @@ nav ul li {
   position: relative;
 }
 nav ul li{
-  background-color: #0c5055;
+  background-color: #0095E0;
   color: #f7f7f7;
 }
 nav ul li a,
@@ -70,7 +70,7 @@ nav ul li a:visited {
 }
 nav ul li a:hover,
 nav ul li a:visited:hover {
-  background: #167b88;
+  background: #9100E8;
   color: #f7f7f7;
 }
 nav ul li a:not(:only-child):after,
@@ -207,7 +207,7 @@ article {
 .action-container {
   border-radius: 5px;
   border: solid 3px;
-  background-color: #9100E8;
+  background-color: #9100E8
 }
 
 .action-button {
@@ -250,6 +250,7 @@ article {
 .welcome-h1 {
   line-height: 80px;
   font-size: 4rem;
+  color: #f7f7f7
 }
 
 .welcome-h2 {
@@ -261,4 +262,3 @@ article {
   border: 1px solid;
   border-color: black;
 }
-
