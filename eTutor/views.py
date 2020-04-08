@@ -12,8 +12,7 @@ from users.forms import CustomRegistrationForm, UpdateUserForm
 from .forms import LangaugeForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-from datetime import datetime, timedelta
-from pytz import timezone
+import datetime
 import pytz
 
 def homePage(request):
@@ -28,18 +27,18 @@ def logout(request):
 
 @login_required
 def usersPage(request):
-    # user = request.user
-    # my_tz = user.current_time_zone.name
-    # my_mnt = datetime.datetime.now()
-    # my_tz = pytz.timezone(my_tz)
-    # my_mnt = my_tz.localize(my_mnt)
+    user1 = request.user
+    my_tz = user1.current_time_zone.name
+    source_date = datetime.datetime.now()
+    source_time_zone = pytz.timezone(my_tz)
+    source_date_with_timezone = source_time_zone.localize(source_date)
     allusers = User.objects.all()
     for user in allusers:
-        # user_mnt = datetime.datetime.now()
-        # user_tz = user.current_time_zone.name
-        # user_tz = pytz.timezone(user_tz)
-        # user_mnt = user_tz.localize(user_mnt)
-        return render(request, 'eTutor/all_users.html', {'allusers': allusers})
+        user_tz = user.current_time_zone.name
+        target_time_zone = pytz.timezone(user_tz)
+        target_date_with_timezone = target_time_zone.localize(source_date)
+        target_date_with_timezone1 = target_date_with_timezone.astimezone(source_time_zone)
+        return render(request, 'eTutor/all_users.html', {'allusers': allusers, 'target_date_with_timezone': target_date_with_timezone})
 
 @login_required
 def user_edit(request):

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load tz %}
 {% block meta %}
 <script src="{% static 'js/all_users.js' %}" defer></script>
 <script src="{% static 'js/like.js' %}" defer></script>
@@ -38,6 +39,14 @@
                         {% endfor %}
                         <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">{{user2.current_time_zone.name }}</h1>
 
+                        {% localtime on %}
+                        {{ value }}
+                        {% endlocaltime %}
+
+                        {% localtime off %}
+                        {{ value }}
+                        {% endlocaltime %}
+
 
                     </div>
                     <div class="dtc v-mid pl6">
@@ -51,10 +60,12 @@
                                 class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Like
                             </button>
+
                             <button data-user='{{user2.id}}'
                                 class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
                                 type='button'>Dislike</button>
                         </form>
+
                     </div>
                 </li>
             </ul>
