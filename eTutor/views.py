@@ -9,6 +9,7 @@ from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
+from .forms import LangaugeForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from datetime import datetime, timedelta
@@ -44,12 +45,15 @@ def usersPage(request):
 def user_edit(request):
     if request.method == 'POST':
         form = UpdateUserForm(request.POST, instance=request.user)
-        if form.is_valid():
+        language_form = LangaugeForm(request.POST)
+        if form.is_valid() or language_form.is_valid():
             user = form.save()
+            language_form.save()
             return redirect('homepage')
     else:
         form = UpdateUserForm(instance=request.user)
-    return render(request, 'eTutor/update.html', {'form':form})
+        language_form = LangaugeForm()
+    return render(request, 'eTutor/update.html', {'form':form, 'language_form': language_form})
 
 @login_required
 def all_rooms(request):
