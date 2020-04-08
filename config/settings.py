@@ -123,10 +123,10 @@ STATICFILES_DIRS = [
 dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
 
-TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
-TWILIO_API_KEY = os.environ.get('TWILIO_API_KEY', None)
-TWILIO_API_SECRET = os.environ.get('TWILIO_API_SECRET', None)
-TWILIO_CHAT_SERVICE_SID = os.environ.get('TWILIO_CHAT_SERVICE_SID', None)
+TWILIO_ACCOUNT_SID = 'ACc8400cf715c06354cf0bf0a7539944c3'
+TWILIO_API_KEY = 'SK53fff1b19287ba8960109d5bbdc0c56c'
+TWILIO_API_SECRET = 'CQKVnuDRufzbyhbjhANkCFTIbHg5jc8f'
+TWILIO_CHAT_SERVICE_SID = 'IS21694630e18c44699c04f0ca315bdfb2'
 
 # Custom user model
 
