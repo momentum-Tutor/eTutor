@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 from django.http import HttpResponse
-from .models import Room, Friendship, Notifications, LikeDislike
+from .models import Room, Friendship, Notifications, LikeDislike, Language, Room_Users, DM_Notifications
 from users.models import User
 from django.conf import settings
 from twilio.jwt.access_token import AccessToken
@@ -11,12 +11,14 @@ from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-
+from datetime import datetime, timedelta
+from pytz import timezone
+import pytz
 
 def homePage(request):
     allusers = User.objects.all()
     if request.user.is_authenticated:
-        return render(request, 'eTutor/homepage.html', {'allusers': allusers,})
+        return render(request, 'eTutor/homepage.html', {'allusers': allusers})
     else: 
         return render(request, 'eTutor/welcome_page.html')
 
@@ -25,8 +27,18 @@ def logout(request):
 
 @login_required
 def usersPage(request):
+    # user = request.user
+    # my_tz = user.current_time_zone.name
+    # my_mnt = datetime.datetime.now()
+    # my_tz = pytz.timezone(my_tz)
+    # my_mnt = my_tz.localize(my_mnt)
     allusers = User.objects.all()
-    return render(request, 'eTutor/all_users.html', {'allusers': allusers})
+    for user in allusers:
+        # user_mnt = datetime.datetime.now()
+        # user_tz = user.current_time_zone.name
+        # user_tz = pytz.timezone(user_tz)
+        # user_mnt = user_tz.localize(user_mnt)
+        return render(request, 'eTutor/all_users.html', {'allusers': allusers})
 
 @login_required
 def user_edit(request):
@@ -40,9 +52,15 @@ def user_edit(request):
     return render(request, 'eTutor/update.html', {'form':form})
 
 @login_required
-def all_rooms(request):
-    rooms = Room.objects.all()
+def public_rooms(request):
+    rooms = Room.objects.filter(private=False)
     return render(request, 'eTutor/messaging.html', {'rooms': rooms})
+
+@login_required
+def my_dms(request):
+    rooms_one = Room_Users.objects.filter(user_one=request.user)
+    rooms_two = Room_Users.objects.filter(user_two=request.user)
+    return render(request, 'eTutor/my_dms.html', {'rooms_one': rooms_one, 'rooms_two': rooms_two})
 
 @login_required
 def room_detail(request, slug):
@@ -86,13 +104,26 @@ def video_chat(request):
 def direct_message(request, slug):
     try:
         room = Room.objects.get(slug=slug)
-        print('room retrieved')
-        print(request.method)
     except Room.DoesNotExist:
-        room = Room(name=slug, description=slug, slug=slug)
+        users = slug.split('SPL')
+        room = Room(name=f'{users[0]} {users[1]}', description=f'Direct messages between {users[0]} and {users[1]}', slug=slug)
         room.save()
-        print("room created")
     return render(request, 'eTutor/messaging_detail.html', {'room': room})
+
+@csrf_exempt
+def dm_users(request, slug):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode("utf-8"))
+        user_one = User.objects.get(username=data.get('user_one'))
+        user_two = User.objects.get(username=data.get('user_two'))
+        dm = Room.objects.get(slug=slug)
+        try:
+            users = Room_Users.objects.get(user_one=user_one, user_two=user_two, dm=dm)
+            return JsonResponse({'dm_users': 'already exists'})
+        except Room_Users.DoesNotExist:
+            users = Room_Users(user_one=user_one, user_two=user_two, dm=dm)
+            users.save()
+            return JsonResponse({'dm_users': 'created'})
 
 @csrf_exempt
 def friend_request(request):
@@ -233,3 +264,56 @@ def dislike(request, pk):
 
         response = {"response": "disliked"}
         return JsonResponse(response)
+
+@csrf_exempt
+def new_dm(request, slug):
+    if request.method == 'POST':
+        users = slug.split('SPL')
+        if users[0] == request.user.username:
+            username_value = users[1]
+        if users[1] == request.user.username:
+            username_value = users[0]
+        try:
+            dm_notif = DM_Notifications.objects.get(room=Room.objects.get(slug=slug), user=User.objects.get(username=username_value))
+            if dm_notif.new == True:
+                return JsonResponse({'notification': 'unread'})
+            else:
+                dm_notif.new == True
+                dm_notif.save()
+                notification = Notifications.objects.get(user=User.objects.get(username=username_value))
+                notification.dm += 1
+                notification.total += 1
+                notification.save()
+                return JsonResponse({'notification': 'set true'})
+        except DM_Notifications.DoesNotExist:
+            room = Room.objects.get(slug=slug)
+            dm_notif = DM_Notifications(room=room, new=True, user=User.objects.get(username=username_value))
+            dm_notif.save()
+            notification = Notifications.objects.get(user=User.objects.get(username=username_value))
+            notification.dm += 1
+            notification.total += 1
+            notification.save()
+            return JsonResponse({'notification': 'created'})
+
+@csrf_exempt
+def message_read(request, slug):
+    if request.method == 'POST':
+        users = slug.split('SPL')
+        if users[0] == request.user.username:
+            username_value = users[1]
+        if users[1] == request.user.username:
+            username_value = users[0]
+        try:
+            dm_notif = DM_Notifications.objects.get(room=Room.objects.get(slug=slug), user=User.objects.get(username=request.user.username))
+            if dm_notif.new == True:
+                dm_notif.new = False
+                dm_notif.save()
+                notification = Notifications.objects.get(user=User.objects.get(username=request.user.username))
+                notification.dm -= 1
+                notification.total -= 1
+                notification.save()
+                return JsonResponse({'message_read': 'marked read'})
+            return JsonResponse({'message_read': 'already read'})
+        except DM_Notifications.DoesNotExist:
+            return JsonResponse({'message_read': 'DM_Notification does not exist yet'})
+        

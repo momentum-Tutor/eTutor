@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'registration',
     'widget_tweaks',
+    
 
     # Project-specific
     'users',
