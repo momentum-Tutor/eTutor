@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-<article class="mw5 fl bg-white br3 pa4-ns mv3 ba b--black-10">
-    <div class="tc">
+<article class="fl tc mw5  bg-white br3 pa4-ns mv3 ba b--black-10">
+    <div>
         <h1 class="f4">{{user}}</h1>
         <hr class="mw3 bb bw1 b--black-10">
     </div>
-    <span id="likes">Likes {{user.dislikes}}</span>
+    <span id="likes">Recomend {{user.dislikes}}</span>
     <span id="dislikes">Dislikes {{user.dislikes}}</span>
 
     <article class="dt w-100 bb b--black-05 pb2 mt2">
@@ -38,7 +38,7 @@
         </div>
     </article>
     <div class="ph3">
-        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black-80" href="{% url 'user_edit' %}">Update</a>
+        <a class="f6 link dim br2 ph3 pv2 mb2 dib white bg-green" href="{% url 'user_edit' %}">Update</a>
     </div>
 </article>
 

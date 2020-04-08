@@ -43,7 +43,6 @@ function sendFriendRequest(arr) {
             })
     }
 }
- 
 
 function LikeOrDislike () {
     console.log('LikeOrDislike')
@@ -81,5 +80,3 @@ function LikeOrDislike () {
 }}
 
 LikeOrDislike()
-
-
