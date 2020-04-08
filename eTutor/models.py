@@ -48,3 +48,16 @@ class TimeZone(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+class Room_Users(models.Model):
+    user_one = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='room_user_one', null=True, blank=True)
+    user_two = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='room_user_two', null=True, blank=True)
+    dm = models.ForeignKey(to='Room', on_delete=models.CASCADE, related_name='room_users', null=True, blank=True)
+
+    def __str__(self):
+        return f"users: {self.user_one}, {self.user_two}"
+
+class DM_Notifications(models.Model):
+    room = models.ForeignKey(to='Room', on_delete=models.CASCADE, related_name='dm_notifications', null=True, blank=True)
+    new = models.BooleanField(default=False)
+    user = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='users_dm_notification', null=True, blank=True)
