@@ -85,16 +85,17 @@ def token(request):
     if chat_service_sid:
         chat_grant = ChatGrant(endpoint_id=endpoint,
                                service_sid=chat_service_sid)
+        grant = VideoGrant(room=None)
         token.add_grant(chat_grant)
-    else:
-        grant = VideoGrant(room='Spanish')
         token.add_grant(grant)
+
     response = {
         'identity': identity,
         'token': token.to_jwt().decode('utf-8')
     }
 
     return JsonResponse(response)
+
 
 @login_required
 def video_chat(request):
