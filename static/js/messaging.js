@@ -147,3 +147,16 @@ function newNotification() {
             console.error('mark read JSON response ERROR')
         })
 }
+
+if (roomPrivacy.textContent == 'True') {
+    let userUsernames = roomName.textContent.split(' ')
+    fetch(`/rooms/${userUsernames[0]}SPL${userUsernames[1]}/message_read/`, {method: 'POST'})
+        .then((response) => response.json())
+        .then(response => {
+            console.log("mark read JSON response received")
+            console.log(response)
+        })
+        .catch((error) => {
+            console.error('mark read JSON response ERROR')
+        })
+}

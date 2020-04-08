@@ -1,39 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block meta %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
 <link rel="stylesheet" href="{% static '/css/rooms-list.css' %}">
+<script src="{% static '/js/room-list.js' %}" defer></script>
 {% endblock meta %}
 {% block content %}
-<h2 class='general-header'>My Direct Messages</h2>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        {% for room in rooms_one %}
-        <div class="column">
-          <div class="card rounded-edges">
-            <div class="card-content">
-              <p class="title is-4">{{room.dm.description}}</p>
-              <div class="content">
-                <a href="/rooms/{{room.dm.slug}}" class="button">Show Messages</a>
-              </div>
-            </div>
-          </div>
+<div class='room-list-header'>
+    <h2 class='general-header'>My Direct Messages</h2>
+</div>
+<div class="container">
+    {% for room in rooms_one %}
+    <div class="card">
+        <h3>{{room.dm.description}}</h3>
+        <div class="content">
+            <a href="/rooms/{{room.dm.slug}}" class="messages-button">Show Messages</a>
+            {% for notification in room.dm.dm_notifications.all %}
+            <span class='etutor-notification new-notif' id='new-notification'>{{notification|notifications_for_user:request.user}}</span>
+            {% endfor %}
         </div>
-        {% endfor %}
-        {% for room in rooms_two %}
-        <div class="column">
-          <div class="card rounded-edges">
-            <div class="card-content">
-              <p class="title is-4">{{room.dm.description}}</p>
-              <div class="content">
-                <a href="/rooms/{{room.dm.slug}}" class="button">Show Messages</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
     </div>
-  </section>
+    {% endfor %}
+    {% for room in rooms_two %}
+    <div class="card">
+        <h3>{{room.dm.description}}</h3>
+        <div class="content">
+            <a href="/rooms/{{room.dm.slug}}" class="messages-button">Show Messages</a>
+            {% for notification in room.dm.dm_notifications.all %}
+            <span class='etutor-notification new-notif' id='new-notification'>{{notification|notifications_for_user:request.user}}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

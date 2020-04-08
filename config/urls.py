@@ -15,6 +15,7 @@ urlpatterns = [
     path('my_dms/', etutor_views.my_dms),
     path('rooms/<slug:slug>', etutor_views.room_detail),
     path('rooms/<slug:slug>/dm_users/', etutor_views.dm_users),
+    path('rooms/<slug:slug>/message_read/', etutor_views.message_read),
     path('videoChat/', etutor_views.video_chat, name="video_chat"),
     url(r'token$', etutor_views.token, name="token"),
     path('direct_message/<slug:slug>', etutor_views.direct_message),

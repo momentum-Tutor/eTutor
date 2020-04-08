@@ -294,3 +294,26 @@ def new_dm(request, slug):
             notification.total += 1
             notification.save()
             return JsonResponse({'notification': 'created'})
+
+@csrf_exempt
+def message_read(request, slug):
+    if request.method == 'POST':
+        users = slug.split('SPL')
+        if users[0] == request.user.username:
+            username_value = users[1]
+        if users[1] == request.user.username:
+            username_value = users[0]
+        try:
+            dm_notif = DM_Notifications.objects.get(room=Room.objects.get(slug=slug), user=User.objects.get(username=request.user.username))
+            if dm_notif.new == True:
+                dm_notif.new = False
+                dm_notif.save()
+                notification = Notifications.objects.get(user=User.objects.get(username=request.user.username))
+                notification.dm -= 1
+                notification.total -= 1
+                notification.save()
+                return JsonResponse({'message_read': 'marked read'})
+            return JsonResponse({'message_read': 'already read'})
+        except DM_Notifications.DoesNotExist:
+            return JsonResponse({'message_read': 'DM_Notification does not exist yet'})
+        

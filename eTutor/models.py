@@ -58,6 +58,6 @@ class Room_Users(models.Model):
         return f"users: {self.user_one}, {self.user_two}"
 
 class DM_Notifications(models.Model):
-    room = models.ForeignKey(to='Room', on_delete=models.CASCADE, related_name='dm_notification', null=True, blank=True)
+    room = models.ForeignKey(to='Room', on_delete=models.CASCADE, related_name='dm_notifications', null=True, blank=True)
     new = models.BooleanField(default=False)
-    user = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='user_dm_notification', null=True, blank=True)
+    user = models.ForeignKey(to='users.user', on_delete=models.CASCADE, related_name='users_dm_notification', null=True, blank=True)
