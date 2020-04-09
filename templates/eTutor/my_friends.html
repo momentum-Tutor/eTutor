@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block meta %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+<script src="{% static 'js/main.js' %}" defer></script>
 <script src="{% static 'js/my_friends.js' %}" defer></script>
 {% endblock meta %}
 
@@ -8,40 +10,69 @@
 <div class="tc">
     <article class="mw12 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
         <h2>My Friends</h2>
-
+        <input id="myInput" type="text" placeholder="Search..">
+        <button type="submit"><i class="fa fa-search"></i></button>
         {% for friend in friend_list_one %}
-        <main class="mw6 center">
-            <ul class="dt w-100  pb2 mt2">
-                <li id='user-selector' class="bb b--black-05">
-                    <div class="dtc v-mid pl3">
-                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_two.username}} &nbsp</p>
-                    </div>
-                    <div class="dtc v-mid pl6">
-                        <form class="w-100 tr">
-                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
-                            id='message-{{friend.user_two.username}}'>Message</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </main>
+        <ul id="myList">
+            <li>
+                <main class="mw6 center">
+                    <ul class="dt w-100  pb2 mt2">
+                        <li id='user-selector' class="bb b--black-05">
+                            <div class="dtc v-mid pl3">
+                                <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_two.username}} &nbsp
+                                </p>
+                            </div>
+                            <div class="dtc v-mid pl6">
+                                <form class="w-100 tr">
+                                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button' id='message-{{friend.user_two.username}}'>Message</button>
+                                    <button data-user='{{friend.id}}'
+                                        class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button'>Like
+                                    </button>{{friend.user_two.likes}}
+
+                                    <button data-user='{{friend.id}}'
+                                        class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button'>Dislike</button>{{friend.user_two.dislikes}}
+
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </main>
+            </li>
+        </ul>
         {% endfor %}
         {% for friend in friend_list_two %}
-        <main class="mw6 center">
-            <ul class="dt w-100  pb2 mt2">
-                <li id='user-selector' class="bb b--black-05">
-                    <div class="dtc v-mid pl3">
-                        <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_one.username}} &nbsp</p>
-                    </div>
-                    <div class="dtc v-mid pl6">
-                        <form class="w-100 tr">
-                            <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
-                            id='message-{{friend.user_one.username}}'>Message</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </main>
+        <ul id="myList">
+            <li>
+                <main class="mw6 center">
+                    <ul class="dt w-100  pb2 mt2">
+                        <li id='user-selector' class="bb b--black-05">
+                            <div class="dtc v-mid pl3">
+                                <p id='friend-name' class="f5 fw6 db black link dim">{{friend.user_one.username}} &nbsp
+                                </p>
+                            </div>
+                            <div class="dtc v-mid pl6">
+                                <form class="w-100 tr">
+                                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button' id='message-{{friend.user_one.username}}'>Message</button>
+                                    <button data-user='{{friend.id}}'
+                                        class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button'>Like
+                                    </button>{{friend.user_one.likes}}
+
+                                    <button data-user='{{friend.id}}'
+                                        class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
+                                        type='button'>Dislike</button>{{friend.user_one.dislikes}}
+
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </main>
+            </li>
+        </ul>
         {% endfor %}
     </article>
 </div>

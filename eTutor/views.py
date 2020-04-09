@@ -12,8 +12,7 @@ from users.forms import CustomRegistrationForm, UpdateUserForm
 from .forms import LangaugeForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-import datetime
-import pytz
+
 
 def homePage(request):
     allusers = User.objects.all()
