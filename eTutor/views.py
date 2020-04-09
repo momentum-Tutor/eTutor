@@ -9,10 +9,10 @@ from django.conf import settings
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant, VideoGrant
 from users.forms import CustomRegistrationForm, UpdateUserForm
+from .forms import LangaugeForm
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
-from datetime import datetime, timedelta
-from pytz import timezone
+import datetime
 import pytz
 
 def homePage(request):
@@ -27,29 +27,22 @@ def logout(request):
 
 @login_required
 def usersPage(request):
-    # user = request.user
-    # my_tz = user.current_time_zone.name
-    # my_mnt = datetime.datetime.now()
-    # my_tz = pytz.timezone(my_tz)
-    # my_mnt = my_tz.localize(my_mnt)
     allusers = User.objects.all()
-    for user in allusers:
-        # user_mnt = datetime.datetime.now()
-        # user_tz = user.current_time_zone.name
-        # user_tz = pytz.timezone(user_tz)
-        # user_mnt = user_tz.localize(user_mnt)
-        return render(request, 'eTutor/all_users.html', {'allusers': allusers})
+    return render(request, 'eTutor/all_users.html', {'allusers': allusers})
 
 @login_required
 def user_edit(request):
     if request.method == 'POST':
         form = UpdateUserForm(request.POST, instance=request.user)
-        if form.is_valid():
+        language_form = LangaugeForm(request.POST)
+        if form.is_valid() or language_form.is_valid():
             user = form.save()
+            language_form.save()
             return redirect('homepage')
     else:
         form = UpdateUserForm(instance=request.user)
-    return render(request, 'eTutor/update.html', {'form':form})
+        language_form = LangaugeForm()
+    return render(request, 'eTutor/update.html', {'form':form, 'language_form': language_form})
 
 @login_required
 def public_rooms(request):

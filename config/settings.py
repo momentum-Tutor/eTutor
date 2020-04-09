@@ -128,6 +128,7 @@ TWILIO_API_KEY = os.environ['TWILIO_API_KEY']
 TWILIO_API_SECRET = os.environ['TWILIO_API_SECRET']
 TWILIO_CHAT_SERVICE_SID = os.environ['TWILIO_CHAT_SERVICE_SID']
 
+
 # Custom user model
 
 AUTH_USER_MODEL = 'users.User'
