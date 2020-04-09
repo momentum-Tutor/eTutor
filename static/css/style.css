@@ -254,3 +254,32 @@ article {
   border: 1px solid;
   border-color: black;
 }
+
+.user-info {
+  text-align: left;
+  width: 200px;
+  max-width: 200px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.user-in-list {
+  background-color: #f7f7f7;
+  border: solid 2px;
+  border-radius: 5px;
+}
+
+.user-list-button {
+  background-color: #9100E8;
+  color: #f7f7f7;
+  border-color: black;
+}
+
+.friend-ratings {
+  width: 130px;
+  
+}
+
+.button-set {
+  float: right;
+}

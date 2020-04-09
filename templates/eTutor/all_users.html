@@ -21,9 +21,9 @@
     {% for user2 in allusers %}
     {% if user2 != user %}
     <ul id="myList">
-        <li id='user-selector'>
-            <div id='{{user}}' class="dtc v-mid pl3">
-                <a class="f5 fw6 db black link dim" href="">{{user2}} &nbsp</a>
+        <li class='user-in-list' id='user-selector'>
+            <div id='{{user}}' class="dtc v-mid pl3 user-info">
+                <a class="f4 fw6 db black link dim" href="">{{user2}} &nbsp</a>
                 <p class="f6 fw4 mt0 mb0 black-90">Primary Language: {{user2.primary_language.name}}</p>
                 {% if user2.known_languages %}
                 <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Known Languages:</h1>
@@ -34,23 +34,25 @@
                 <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">Want to learn:</h1>
                 {% for language in user2.wanted_languages.all %}
                 <p class="f6 fw4 mt0 mb0 black-60">{{language.name}}</p>
-                {% endfor %}
+                {% endfor %}    
                 <h1 class="f6 f6-ns fw6 lh-title black-80 mv0">{{user2.current_time_zone.name }}</h1>
+                <p class="f6 fw4 mt0 mb0 black-90">Positive Ratings: {{user2.likes}}</p>
+                <p class="f6 fw4 mt0 mb0 black-90">Negative Ratings: {{user2.dislikes}}</p>
             </div>
             <div class="dtc v-mid pl6">
                 <form class="w-100 tr">
-                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
+                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60 user-list-button' type='button'
                         id='friend-{{user2}}'>Friend Request
                     </button>
-                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'
+                    <button class='f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60 user-list-button' type='button'
                         id='message-{{user2}}'>Message</button>
                     <button data-user='{{user2.id}}'
-                        class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60' type='button'>Like
-                    </button>{{user2.likes}}
+                        class='like f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60 user-list-button' type='button'>Rate Positive
+                    </button>
 
                     <button data-user='{{user2.id}}'
-                        class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60'
-                        type='button'>Dislike</button>{{user2.dislikes}}
+                        class='dislike f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60 user-list-button'
+                        type='button'>Rate Negative</button>
                 </form>
 
             </div>
