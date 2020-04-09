@@ -42,7 +42,6 @@ function notifications () {
     })
     .catch((error) => {
       console.error('notifications failed')
-      setTimeout(notifications(), 10000)
     })
   function displayNotifications (data) {
     if (data.total > 0) {
