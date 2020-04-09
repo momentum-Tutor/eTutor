@@ -3,7 +3,7 @@ body {
 	margin: 0;
   padding: 0;
   background-color: #f7f7f7;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 ul li {
@@ -282,4 +282,13 @@ article {
 
 .button-set {
   float: right;
+}
+
+.welcome-link {
+  color: black;
+  /* margin-top: 100px; */
+}
+
+.welcome-link:hover {
+  color: #9100E8;
 }
