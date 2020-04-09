@@ -89,6 +89,10 @@ function setupChannel(name) {
     // Listen for new messages sent to the channel
     roomChannel.on("messageAdded", function (message) {
         printMessage(message.author, message.body);
+        if (roomPrivacy.textContent == 'True') {
+            markRead()
+        }
+
     });
 }
 function processPage(page) {
@@ -149,6 +153,10 @@ function newNotification() {
 }
 
 if (roomPrivacy.textContent == 'True') {
+    markRead()
+}
+
+function markRead() {
     let userUsernames = roomName.textContent.split(' ')
     fetch(`/rooms/${userUsernames[0]}SPL${userUsernames[1]}/message_read/`, {method: 'POST'})
         .then((response) => response.json())

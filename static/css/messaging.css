@@ -1,12 +1,16 @@
 .messaging-container {
     width: 75%;
+    margin: auto;
 }
 
 .message-box {
     overflow-y: auto;
     width: 100%;
     height: 500px;
-    border: solid 1px;
+    border: solid 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     background-color: white;
 }
 
@@ -31,7 +35,7 @@
     margin-right: 3px;
     margin-top: 3px;
     margin-bottom: 5px;
-    border-top: solid 2px;
+    border-top: solid 1px;
     border-color: black;
     padding-top: 5px;
 }
@@ -41,25 +45,45 @@
     margin-right: 3px;
     margin-top: 3px;
     margin-bottom: 5px;
-    border-top: solid 2px;
+    border-top: solid 1px;
     padding-top: 5px;
 }
 
 .message-input {
-    width: calc(100% - 50px);
+    width: calc(100% - 130px);
     display: inline;
     float: left;
     height: 60px;
+    resize: none;
+    border-top: 0;
+    border-left: solid 2px;
+    border-right: solid 2px;
+    border-bottom: solid 2px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-color: black;
 }
 
 .message-button {
-    width: 50px;
+    width: 80px;
+    height: 34px;
     vertical-align: top;
-    float: left;
-    border-radius: 0;
+    float: right;
+    border-radius: 3px;
     display: inline;
+    font-size: 1.3rem;
+    color: #f7f7f7;
+    background-color: #9100E8;
+    border: solid 2px;
+    border-color: black;
+    margin-right: 25px;
+    margin-top: 13px;
 }
 
 .hidden {
     visibility: hidden;
+}
+
+.room-description {
+    text-align: center;
 }

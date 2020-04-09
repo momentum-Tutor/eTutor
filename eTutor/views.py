@@ -222,6 +222,8 @@ def mark_read(request):
         data = json.loads(request.body.decode("utf-8"))
         user_one = User.objects.get(username=data.get('user_one'))
         user_two = User.objects.get(username=data.get('user_two'))
+        if user_one == request.user:
+            user = user_two
         friendship = Friendship.objects.get(user_one=user_one, user_two=user_two)
         if friendship.new == False:
             return JsonResponse({'mark_read': 'already marked read'})
@@ -271,7 +273,7 @@ def new_dm(request, slug):
             if dm_notif.new == True:
                 return JsonResponse({'notification': 'unread'})
             else:
-                dm_notif.new == True
+                dm_notif.new = True
                 dm_notif.save()
                 notification = Notifications.objects.get(user=User.objects.get(username=username_value))
                 notification.dm += 1

@@ -23,6 +23,8 @@
     padding-left: 15px;
     padding-right: 15px;
     margin: auto;
+    background-color: white;
+    margin-bottom: 20px;
 }
 
 .messages-button {
