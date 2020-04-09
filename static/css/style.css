@@ -134,6 +134,7 @@ nav ul li ul li a {
   .nav-dropdown {
     position: static;
   }
+}
 
 #nav-toggle {
   position: absolute;
@@ -174,6 +175,7 @@ nav ul li ul li a {
   transform: rotate(-45deg);
 }
 
+
 article {
   max-width: 1000px;
   margin: 0 auto;
@@ -182,7 +184,7 @@ article {
 .checked {
   color: orange;
 }
-}
+
 
 .etutor-notification {
   padding-left: 2px;
