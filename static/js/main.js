@@ -26,17 +26,18 @@ $(document).ready(function () {
   })
 })
 
-const totalNotification = document.querySelector('#total-notification')
-const dmNotification = document.querySelector('#DM-notification')
-const frNotification = document.querySelector('#FR-notification')
+let totalNotification = document.querySelector('#total-notification')
+let dmNotification = document.querySelector('#DM-notification')
+let frNotification = document.querySelector('#FR-notification')
 
 function notifications () {
   fetch('/notification/get/', {
     method: 'GET',
-    headers: { 'Content-type': 'application/json' }
+    headers: { 'Content-type': 'application/json' },
   })
     .then((response) => response.json())
     .then(data => {
+      console.log('works')
       displayNotifications(data)
     })
     .catch((error) => {
