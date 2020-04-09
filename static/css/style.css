@@ -5,13 +5,14 @@ body {
   background-color: #f7f7f7;
   font-family: sans-serif;
 }
+
 ul li {
   list-style: none;
 }
 
 .nav-bar {
   height: 70px;
-  background: #0c5055;
+  background: #0095E0;
 }
 
 .logo {
@@ -24,7 +25,7 @@ ul li {
 }
 
 .searchBar{
-  padding-right: 100px;
+  padding-right: 50px;
   line-height: 70px;
   
 }
@@ -55,7 +56,7 @@ nav ul li {
   position: relative;
 }
 nav ul li{
-  background-color: #0c5055;
+  background-color: #0095E0;
   color: #f7f7f7;
 }
 nav ul li a,
@@ -69,7 +70,7 @@ nav ul li a:visited {
 }
 nav ul li a:hover,
 nav ul li a:visited:hover {
-  background: #167b88;
+  background: #9100E8;
   color: #f7f7f7;
 }
 nav ul li a:not(:only-child):after,
@@ -101,15 +102,6 @@ nav ul li ul li a {
 }
 
 @media only screen and (max-width: 1100px) {
-.searchBar{
-padding-right: 50px;
-}
-.logo {
-  display: none;
-}
-}
-
-@media only screen and (max-width: 798px) {
   .nav-mobile {
     display: block;
   }
@@ -142,18 +134,18 @@ padding-right: 50px;
   .nav-dropdown {
     position: static;
   }
-	.logo a img {
+	/* .logo a img {
 		max-height: 60px;
 		margin-top: 5px;
-  }
+  } */
 }
-@media screen and (min-width: 799px) {
+/* @media screen and (min-width: 799px) {
   .nav-list {
     display: block !important;
     color: #167b88;
   }
 
-}
+} */
 #nav-toggle {
   position: absolute;
   left: 18px;
@@ -215,7 +207,7 @@ article {
 .action-container {
   border-radius: 5px;
   border: solid 3px;
-  background-color: #9100E8;
+  background-color: #9100E8
 }
 
 .action-button {
@@ -258,6 +250,7 @@ article {
 .welcome-h1 {
   line-height: 80px;
   font-size: 4rem;
+  color: #f7f7f7
 }
 
 .welcome-h2 {

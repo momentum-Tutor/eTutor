@@ -12,19 +12,6 @@ class User(AbstractUser):
     wanted_languages = models.ManyToManyField(to=Language, related_name='wanted_languages')
     current_time_zone = models.ForeignKey(to=TimeZone, on_delete=models.CASCADE, related_name='current_time_zone', blank=True, null=True)
     
-    
-
-    @property
-    def one(self):
-        return LikeDislike.objects.filter(user_two=self, like=True).count
-
-    @property
-    def two(self):
-        return LikeDislike.objects.filter(user_two=self, like=False).count
-
-    @property
-    def three(self):
-        return LikeDislike.objects.filter(user_two=self, like=True).count
 
     @property
     def dislikes(self):
@@ -33,5 +20,3 @@ class User(AbstractUser):
     @property
     def likes(self):
         return LikeDislike.objects.filter(user_two=self, like=True).count
-
-    

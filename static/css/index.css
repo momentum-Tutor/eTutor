@@ -118,3 +118,11 @@ div#log p {
   text-indent: -1.25em;
   width: 90%;
 }
+
+.eTutor-button {
+  background-color: #9100E8;
+  color: #f7f7f7;
+  width: 16em;
+  border: solid 2px;
+  border-color: black;
+}
