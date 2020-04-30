@@ -21,7 +21,7 @@
     "@twilio/webrtc": "^4.2.0",
     "backoff": "^2.5.0",
     "browserify": "^16.5.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "precond": "^0.2.3",
     "twilio-video": "^2.3.0",
     "webpack": "^4.42.1",
