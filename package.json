@@ -27,7 +27,7 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "window": "^4.2.7",
-    "ws": "^7.2.3",
+    "ws": "^7.4.6",
     "xmlhttprequest": "^1.8.0"
   }
 }
