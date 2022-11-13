@@ -25,7 +25,7 @@
     "precond": "^0.2.3",
     "twilio-video": "^2.3.0",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "window": "^4.2.7",
     "ws": "^7.2.3",
     "xmlhttprequest": "^1.8.0"
